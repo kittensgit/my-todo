@@ -1,8 +1,10 @@
-import { useState } from 'react'
-import Todo from './Todo'
-import TodoForm from './TodoForm'
+import { useState } from "react";
+import TodoForm from "./components/TodoForm";
+import Todo from "./components/Todo";
+
 
 function App() {
+
   const [todos, setTodos] = useState([])
 
   const addTask = (userInput) => {
@@ -20,10 +22,10 @@ function App() {
     setTodos([...todos.filter((todo) => todo.id !== id)])
   }
 
-  const handleToggle = (id) => {
+  const toggleTask = (id) => {
     setTodos([
       ...todos.map((todo) =>
-        todo.id === id ? { ...todo, complete: !todo.complete } : { ...todo }
+        todo.id === id ? {...todo, complete: !todo.complete } : {...todo}
       )
     ])
   }
@@ -31,21 +33,19 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>todo list: {todos.length}</h1>
+        <h1>TODO LIST: {todos.length}</h1>
       </header>
       <TodoForm addTask={addTask} />
       {todos.map((todo) => {
-        return (
-          <Todo
-            todo={todo}
-            key={todo.id}
-            toggleTask={handleToggle}
-            removeTask={removeTask}
-          />
-        )
+        return <Todo
+          todo={todo}
+          key={todo.id}
+          toggleTask={toggleTask}
+          removeTask={removeTask}
+        />
       })}
     </div>
-  );
+  )
 }
 
 export default App;
