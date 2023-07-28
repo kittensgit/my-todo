@@ -1,22 +1,26 @@
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .App {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .todo {
-  display: flex;
-  border: 2px solid #000000;
-  border-radius: 5px;
-  padding: 15px;
-  margin-top: 20px;
-  width: 400px;
-  justify-content: space-between;
+    display: flex;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+    width: 400px;
+    justify-content: space-between;
+}
+
+.complete {
+    text-decoration: line-through;
 }
