@@ -9,6 +9,15 @@ const App = () => {
         { id: uuidv4(), tasks: 'to make dinner', complete: false },
     ]);
 
+    const addTodo = (tasks) => {
+        const newTodo = {
+            id: uuidv4(),
+            tasks,
+            complete: false,
+        };
+        setTodos([...todos, newTodo]);
+    };
+
     const deleteTodo = (id) => {
         setTodos(todos.filter((todo) => todo.id !== id));
     };
@@ -16,7 +25,7 @@ const App = () => {
     return (
         <div className="App">
             <h1>Todo count: {todos.length}</h1>
-            <TodoForm />
+            <TodoForm addTodo={addTodo} />
             {todos.map((todo) => (
                 <Todo
                     key={todo.id}
