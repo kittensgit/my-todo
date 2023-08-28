@@ -9,12 +9,21 @@ const App = () => {
         { id: uuidv4(), tasks: 'to make dinner', complete: false },
     ]);
 
+    const removeTask = (id) => {
+        setTodos(todos.filter((todo) => todo.id !== id));
+    };
+
     return (
         <div className="App">
             <h1>task count: {todos.length}</h1>
             <TodoForm />
             {todos.map((todo) => (
-                <Todo key={todo.id} id={todo.id} tasks={todo.tasks} />
+                <Todo
+                    key={todo.id}
+                    id={todo.id}
+                    tasks={todo.tasks}
+                    removeTask={removeTask}
+                />
             ))}
         </div>
     );
