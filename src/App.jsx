@@ -9,7 +9,15 @@ const App = () => {
         { id: uuidv4(), tasks: 'to make dinner', complete: false },
     ]);
 
-    return <div>App</div>;
+    return (
+        <div className="App">
+            <h1>task count: {todos.length}</h1>
+            <TodoForm />
+            {todos.map((todo) => (
+                <Todo key={todo.id} id={todo.id} tasks={todo.tasks} />
+            ))}
+        </div>
+    );
 };
 
 export default App;
