@@ -12,16 +12,9 @@ const App = () => {
     return (
         <div className="App">
             <h1>task count: {todos.length}</h1>
-            <TodoForm addTask={addTask} />
+            <TodoForm />
             {todos.map((todo) => (
-                <Todo
-                    key={todo.id}
-                    id={todo.id}
-                    tasks={todo.tasks}
-                    complete={todo.complete}
-                    removeTask={removeTask}
-                    toggleTodo={toggleTodo}
-                />
+                <Todo key={todo.id} id={todo.id} tasks={todo.tasks} />
             ))}
         </div>
     );
