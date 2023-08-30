@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 
-const TodoForm = () => {
+const TodoForm = ({ addTask }) => {
     const [value, setValue] = useState('');
 
     const handleChange = (e) => {
         setValue(e.target.value);
+    };
+
+    const addTodo = () => {
+        addTask(value);
+        setValue('');
     };
 
     return (
@@ -15,7 +20,7 @@ const TodoForm = () => {
                 value={value}
                 onChange={handleChange}
             />
-            <button>add task</button>
+            <button onClick={addTodo}>Add task</button>
         </div>
     );
 };
