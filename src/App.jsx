@@ -9,31 +9,6 @@ const App = () => {
         { id: uuidv4(), tasks: 'to make dinner', complete: false },
     ]);
 
-    const addTask = (tasks) => {
-        if (tasks) {
-            const newTask = {
-                id: uuidv4(),
-                tasks,
-                complete: false,
-            };
-            setTodos([newTask, ...todos]);
-        }
-    };
-
-    const removeTask = (id) => {
-        setTodos(todos.filter((todo) => todo.id !== id));
-    };
-
-    const toggleTodo = (id) => {
-        const tasks = todos.filter((task) => {
-            if (task.id === id) {
-                task.complete = !task.complete;
-            }
-            return task;
-        });
-        setTodos(tasks);
-    };
-
     return (
         <div className="App">
             <h1>task count: {todos.length}</h1>
