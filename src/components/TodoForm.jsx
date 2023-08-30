@@ -12,6 +12,12 @@ const TodoForm = ({ addTask }) => {
         setValue('');
     };
 
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            addTodo();
+        }
+    };
+
     return (
         <div>
             <input
@@ -19,6 +25,7 @@ const TodoForm = ({ addTask }) => {
                 placeholder="enter task"
                 value={value}
                 onChange={handleChange}
+                onKeyDown={handleKeyPress}
             />
             <button onClick={addTodo}>Add task</button>
         </div>
