@@ -24,6 +24,16 @@ const App = () => {
         setTodos(todos.filter((todo) => todo.id !== id));
     };
 
+    const toggleTodo = (id) => {
+        const tasks = todos.filter((task) => {
+            if (task.id === id) {
+                task.complete = !task.complete;
+            }
+            return task;
+        });
+        setTodos(tasks);
+    };
+
     return (
         <div className="App">
             <h1>task count: {todos.length}</h1>
@@ -33,7 +43,9 @@ const App = () => {
                     key={todo.id}
                     id={todo.id}
                     tasks={todo.tasks}
+                    complete={todo.complete}
                     removeTask={removeTask}
+                    toggleTodo={toggleTodo}
                 />
             ))}
         </div>
