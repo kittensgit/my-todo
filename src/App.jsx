@@ -34,10 +34,19 @@ const App = () => {
         setTodos(tasks);
     };
 
+    const completedTasks = todos.filter((todo) => todo.complete);
+    const progress = (completedTasks.length / todos.length) * 100;
+
     return (
         <div className="App">
             <h1>task count: {todos.length}</h1>
             <TodoForm addTask={addTask} />
+            <div className="line">
+                <div
+                    style={{ width: `${progress}%` }}
+                    className="progress"
+                ></div>
+            </div>
             {todos.map((todo) => (
                 <Todo
                     key={todo.id}
