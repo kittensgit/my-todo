@@ -20,6 +20,12 @@ const App = () => {
         }
     };
 
+    const updateTask = (updateTodo) => {
+        setTodos(
+            todos.map((todo) => (todo.id === updateTodo.id ? updateTodo : todo))
+        );
+    };
+
     const removeTask = (id) => {
         setTodos(todos.filter((todo) => todo.id !== id));
     };
@@ -49,12 +55,14 @@ const App = () => {
             </div>
             {todos.map((todo) => (
                 <Todo
+                    todo={todo}
                     key={todo.id}
                     id={todo.id}
                     tasks={todo.tasks}
                     complete={todo.complete}
                     removeTask={removeTask}
                     toggleTodo={toggleTodo}
+                    updateTask={updateTask}
                 />
             ))}
         </div>

@@ -1,15 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
+import EditTodoForm from './EditTodoForm';
 
-const Todo = ({ tasks, removeTask, id, complete, toggleTodo }) => {
+const Todo = ({
+    todo,
+    tasks,
+    removeTask,
+    id,
+    complete,
+    toggleTodo,
+    updateTask,
+}) => {
+    const [isEdit, setIsEdit] = useState(false);
+
+    const toggleEdit = () => {
+        setIsEdit(!isEdit);
+    };
+
     return (
         <div className="todo">
-            <div
-                className={complete ? 'complete' : ''}
-                onClick={() => toggleTodo(id)}
-            >
-                {tasks}
-            </div>
-            <button onClick={() => removeTask(id)}>delete</button>
+            {isEdit ? (
+                <EditTodoForm
+                    todo={todo}
+                    updateTask={updateTask}
+                    toggleEdit={toggleEdit}
+                />
+            ) : (
+                <>
+                    <div
+                        className={complete ? 'complete' : ''}
+                        onClick={() => toggleTodo(id)}
+                    >
+                        {tasks}
+                    </div>
+                    <div>
+                        <button onClick={toggleEdit}>edit</button>
+                        <button
+                            className="delete"
+                            onClick={() => removeTask(id)}
+                        >
+                            delete
+                        </button>
+                    </div>
+                </>
+            )}
         </div>
     );
 };

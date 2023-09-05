@@ -21,6 +21,7 @@ const TodoForm = ({ addTask }) => {
     return (
         <div>
             <input
+                className="form"
                 type="text"
                 placeholder="enter task"
                 value={value}
