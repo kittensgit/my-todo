@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const TodoForm = ({ addTask }) => {
+const TodoForm = ({ addTask, clearTask }) => {
     const [value, setValue] = useState('');
 
     const handleChange = (e) => {
@@ -28,7 +28,16 @@ const TodoForm = ({ addTask }) => {
                 onChange={handleChange}
                 onKeyDown={handleKeyPress}
             />
-            <button onClick={addTodo}>Add task</button>
+            <button style={{ marginRight: '20px' }} onClick={addTodo}>
+                add task
+            </button>
+            <button
+                onClick={() => {
+                    clearTask();
+                }}
+            >
+                clear all done task
+            </button>
         </div>
     );
 };

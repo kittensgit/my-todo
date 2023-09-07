@@ -40,13 +40,17 @@ const App = () => {
         setTodos(tasks);
     };
 
+    const clearTask = () => {
+        setTodos(todos.filter((todo) => todo.complete !== true));
+    };
+
     const completedTasks = todos.filter((todo) => todo.complete);
     const progress = (completedTasks.length / todos.length) * 100;
 
     return (
         <div className="App">
             <h1>task count: {todos.length}</h1>
-            <TodoForm addTask={addTask} />
+            <TodoForm addTask={addTask} clearTask={clearTask} />
             <div className="line">
                 <div
                     style={{ width: `${progress}%` }}
