@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Todo from './components/Todo';
 import TodoForm from './components/TodoForm';
@@ -9,6 +9,13 @@ const App = () => {
         { id: uuidv4(), tasks: 'to make dinner', complete: false },
     ]);
 
+    useEffect(() => {
+        const localTasks = JSON.parse(localStorage.getItem('tasks'));
+        if (localTasks) {
+            setTodos(localTasks);
+        }
+    }, []);
+
     const addTask = (tasks) => {
         if (tasks) {
             const newTask = {
@@ -16,7 +23,9 @@ const App = () => {
                 tasks,
                 complete: false,
             };
-            setTodos([newTask, ...todos]);
+            const updatedTasks = [newTask, ...todos];
+            setTodos(updatedTasks);
+            localStorage.setItem('tasks', JSON.stringify(updatedTasks));
         }
     };
 
@@ -27,7 +36,9 @@ const App = () => {
     };
 
     const removeTask = (id) => {
-        setTodos(todos.filter((todo) => todo.id !== id));
+        const updatedTasks = todos.filter((todo) => todo.id !== id);
+        setTodos(updatedTasks);
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     };
 
     const toggleTodo = (id) => {
@@ -38,6 +49,7 @@ const App = () => {
             return task;
         });
         setTodos(tasks);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
     };
 
     const clearTask = () => {
