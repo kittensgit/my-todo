@@ -1,3 +1,4 @@
+import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
 
 const TodoForm = ({ addTask, clearTask }) => {
@@ -19,25 +20,32 @@ const TodoForm = ({ addTask, clearTask }) => {
     };
 
     return (
-        <div>
-            <input
-                className="form"
-                type="text"
-                placeholder="enter task"
+        <div className="todoform">
+            <TextField
+                size="small"
+                id="outlined-basic"
+                label="Enter task"
+                variant="outlined"
                 value={value}
                 onChange={handleChange}
                 onKeyDown={handleKeyPress}
             />
-            <button style={{ marginRight: '20px' }} onClick={addTodo}>
+            <Button
+                style={{ marginRight: '20px', marginLeft: '20px' }}
+                onClick={addTodo}
+                variant="contained"
+            >
                 add task
-            </button>
-            <button
+            </Button>
+            <Button
                 onClick={() => {
                     clearTask();
                 }}
+                variant="outlined"
             >
+                {' '}
                 clear all done task
-            </button>
+            </Button>
         </div>
     );
 };

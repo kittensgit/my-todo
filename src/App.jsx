@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Todo from './components/Todo';
 import TodoForm from './components/TodoForm';
+import { Box, LinearProgress, Typography } from '@mui/material';
 
 const App = () => {
     const [todos, setTodos] = useState([
@@ -61,14 +62,15 @@ const App = () => {
 
     return (
         <div className="App">
-            <h1>task count: {todos.length}</h1>
+            <Typography variant="h2" gutterBottom>
+                task count: {todos.length}
+            </Typography>
+
             <TodoForm addTask={addTask} clearTask={clearTask} />
-            <div className="line">
-                <div
-                    style={{ width: `${progress}%` }}
-                    className="progress"
-                ></div>
-            </div>
+            <Box mt={2} sx={{ width: '400px' }}>
+                <LinearProgress variant="determinate" value={progress} />
+            </Box>
+
             {todos.map((todo) => (
                 <Todo
                     todo={todo}

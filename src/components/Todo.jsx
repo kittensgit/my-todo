@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import EditTodoForm from './EditTodoForm';
+import { Box, Button, Typography } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const Todo = ({
     todo,
@@ -17,7 +20,13 @@ const Todo = ({
     };
 
     return (
-        <div className="todo">
+        <Box
+            sx={{
+                p: 2,
+                border: '1px dashed grey',
+            }}
+            className="todo"
+        >
             {isEdit ? (
                 <EditTodoForm
                     todo={todo}
@@ -26,24 +35,29 @@ const Todo = ({
                 />
             ) : (
                 <>
-                    <div
+                    <Typography
                         className={complete ? 'complete' : ''}
                         onClick={() => toggleTodo(id)}
+                        variant="subtitle1"
+                        gutterBottom
                     >
                         {tasks}
-                    </div>
+                    </Typography>
+
                     <div>
-                        <button onClick={toggleEdit}>edit</button>
-                        <button
+                        <Button onClick={toggleEdit}>
+                            <EditIcon />
+                        </Button>
+                        <Button
                             className="delete"
                             onClick={() => removeTask(id)}
                         >
-                            delete
-                        </button>
+                            <DeleteIcon />
+                        </Button>
                     </div>
                 </>
             )}
-        </div>
+        </Box>
     );
 };
 

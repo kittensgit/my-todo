@@ -13,12 +13,12 @@
 
 .todo {
     display: flex;
-    border: 2px solid #000000;
+    align-items: center;
+    justify-content: space-between;
     border-radius: 5px;
     padding: 15px;
     margin-top: 20px;
     width: 400px;
-    justify-content: space-between;
 }
 
 .complete {
@@ -28,6 +28,19 @@
 
 .form {
     margin-top: 12px;
+}
+
+.todoform {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.editform {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    gap: 100px;
 }
 
 input {

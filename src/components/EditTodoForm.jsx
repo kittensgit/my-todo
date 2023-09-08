@@ -1,3 +1,4 @@
+import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
 
 const EditTodoForm = ({ todo, updateTask, toggleEdit }) => {
@@ -23,15 +24,19 @@ const EditTodoForm = ({ todo, updateTask, toggleEdit }) => {
     };
 
     return (
-        <div>
-            <input
-                type="text"
+        <div className="editform">
+            <TextField
+                id="standard-basic"
+                label="Enter task"
+                variant="standard"
                 value={value}
                 onChange={handleChange}
                 onKeyDown={handleEnter}
                 onBlur={handleBlur}
             />
-            <button onClick={handleSave}>save</button>
+            <Button onClick={handleSave} variant="contained">
+                save
+            </Button>
         </div>
     );
 };
