@@ -2,7 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Todo from './components/Todo';
 import TodoForm from './components/TodoForm';
-import { Box, Button, LinearProgress, Typography } from '@mui/material';
+import {
+    Box,
+    Button,
+    IconButton,
+    InputAdornment,
+    LinearProgress,
+    TextField,
+    Typography,
+} from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 const App = () => {
     const [todos, setTodos] = useState([
@@ -11,6 +20,7 @@ const App = () => {
     ]);
 
     const [filter, setFilter] = useState('all');
+    const [searchText, setSearchText] = useState('');
 
     useEffect(() => {
         const localTasks = JSON.parse(localStorage.getItem('tasks'));
@@ -63,12 +73,16 @@ const App = () => {
     const progress = (completedTasks.length / todos.length) * 100;
 
     const filteredTasks = todos.filter((todo) => {
+        //filter task
         if (filter === 'completed') {
             return todo.complete;
         } else if (filter === 'uncompleted') {
             return !todo.complete;
         }
-        return true;
+        //search task
+        const textTask = todo.tasks.toLocaleLowerCase();
+        const searchTextTaskLower = searchText.toLocaleLowerCase();
+        return textTask.includes(searchTextTaskLower);
     });
 
     return (
@@ -107,6 +121,25 @@ const App = () => {
                 >
                     Uncompleted
                 </Button>
+                <TextField
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton>
+                                    <SearchIcon />
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
+                    size="small"
+                    id="outlined-basic"
+                    label="Search"
+                    variant="outlined"
+                    value={searchText}
+                    onChange={(e) => {
+                        setSearchText(e.target.value);
+                    }}
+                />
             </Box>
 
             {filteredTasks.map((todo) => (
