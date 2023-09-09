@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Todo from './components/Todo';
 import TodoForm from './components/TodoForm';
-import { Box, LinearProgress, Typography } from '@mui/material';
+import { Box, Button, LinearProgress, Typography } from '@mui/material';
 
 const App = () => {
     const [todos, setTodos] = useState([
         { id: uuidv4(), tasks: 'go to store', complete: false },
         { id: uuidv4(), tasks: 'to make dinner', complete: false },
     ]);
+
+    const [filter, setFilter] = useState('all');
 
     useEffect(() => {
         const localTasks = JSON.parse(localStorage.getItem('tasks'));
@@ -60,6 +62,15 @@ const App = () => {
     const completedTasks = todos.filter((todo) => todo.complete);
     const progress = (completedTasks.length / todos.length) * 100;
 
+    const filteredTasks = todos.filter((todo) => {
+        if (filter === 'completed') {
+            return todo.complete;
+        } else if (filter === 'uncompleted') {
+            return !todo.complete;
+        }
+        return true;
+    });
+
     return (
         <div className="App">
             <Typography variant="h2" gutterBottom>
@@ -71,7 +82,34 @@ const App = () => {
                 <LinearProgress variant="determinate" value={progress} />
             </Box>
 
-            {todos.map((todo) => (
+            <Box mt={2} sx={{ display: 'flex', gap: '10px' }}>
+                <Button
+                    variant="contained"
+                    onClick={() => {
+                        setFilter('all');
+                    }}
+                >
+                    All
+                </Button>
+                <Button
+                    variant="contained"
+                    onClick={() => {
+                        setFilter('completed');
+                    }}
+                >
+                    Completed
+                </Button>
+                <Button
+                    variant="contained"
+                    onClick={() => {
+                        setFilter('uncompleted');
+                    }}
+                >
+                    Uncompleted
+                </Button>
+            </Box>
+
+            {filteredTasks.map((todo) => (
                 <Todo
                     todo={todo}
                     key={todo.id}
