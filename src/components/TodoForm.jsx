@@ -1,5 +1,6 @@
-import { Button, MenuItem, TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
+import SelectPriority from './SelectPriority';
 
 const TodoForm = ({ addTask, clearTask, priority, changePriority }) => {
     const [value, setValue] = useState('');
@@ -30,20 +31,10 @@ const TodoForm = ({ addTask, clearTask, priority, changePriority }) => {
                 onChange={handleChange}
                 onKeyDown={handleKeyPress}
             />
-            <TextField
-                sx={{ marginLeft: '10px' }}
-                select
-                label="Priority"
-                value={priority}
-                onChange={(e) => {
-                    changePriority(e.target.value);
-                }}
-                size="small"
-            >
-                <MenuItem value="high">High</MenuItem>
-                <MenuItem value="medium">Medium</MenuItem>
-                <MenuItem value="ease">Ease</MenuItem>
-            </TextField>
+            <SelectPriority
+                priority={priority}
+                changePriority={changePriority}
+            />
             <Button
                 style={{ marginRight: '20px', marginLeft: '20px' }}
                 onClick={addTodo}

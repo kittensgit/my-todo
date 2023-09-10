@@ -2,16 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Todo from './components/Todo';
 import TodoForm from './components/TodoForm';
-import {
-    Box,
-    Button,
-    IconButton,
-    InputAdornment,
-    LinearProgress,
-    TextField,
-    Typography,
-} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import { Box, LinearProgress, Typography } from '@mui/material';
+import FilterTodo from './components/FilterTodo';
 
 const App = () => {
     const [todos, setTodos] = useState([
@@ -95,7 +87,7 @@ const App = () => {
     return (
         <div className="App">
             <Typography variant="h2" gutterBottom>
-                task count: {todos.length}
+                Task count: {todos.length}
             </Typography>
 
             <TodoForm
@@ -108,64 +100,26 @@ const App = () => {
                 <LinearProgress variant="determinate" value={progress} />
             </Box>
 
-            <Box mt={2} sx={{ display: 'flex', gap: '10px' }}>
-                <Button
-                    variant="contained"
-                    onClick={() => {
-                        setFilter('all');
-                    }}
-                >
-                    All
-                </Button>
-                <Button
-                    variant="contained"
-                    onClick={() => {
-                        setFilter('completed');
-                    }}
-                >
-                    Completed
-                </Button>
-                <Button
-                    variant="contained"
-                    onClick={() => {
-                        setFilter('uncompleted');
-                    }}
-                >
-                    Uncompleted
-                </Button>
-                <TextField
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton>
-                                    <SearchIcon />
-                                </IconButton>
-                            </InputAdornment>
-                        ),
-                    }}
-                    size="small"
-                    id="outlined-basic"
-                    label="Search"
-                    variant="outlined"
-                    value={searchText}
-                    onChange={(e) => {
-                        setSearchText(e.target.value);
-                    }}
-                />
-            </Box>
+            <FilterTodo
+                setFilter={setFilter}
+                searchText={searchText}
+                setSearchText={setSearchText}
+            />
 
-            {filteredTasks.map((todo) => (
-                <Todo
-                    todo={todo}
-                    key={todo.id}
-                    id={todo.id}
-                    tasks={todo.tasks}
-                    complete={todo.complete}
-                    removeTask={removeTask}
-                    toggleTodo={toggleTodo}
-                    updateTask={updateTask}
-                />
-            ))}
+            <Box marginBottom={'50px'}>
+                {filteredTasks.map((todo) => (
+                    <Todo
+                        todo={todo}
+                        key={todo.id}
+                        id={todo.id}
+                        tasks={todo.tasks}
+                        complete={todo.complete}
+                        removeTask={removeTask}
+                        toggleTodo={toggleTodo}
+                        updateTask={updateTask}
+                    />
+                ))}
+            </Box>
         </div>
     );
 };
