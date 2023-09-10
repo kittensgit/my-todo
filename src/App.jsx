@@ -29,6 +29,8 @@ const App = () => {
                 tasks,
                 complete: false,
                 priority: priority,
+                createdAt: new Date(),
+                updateAt: null,
             };
             setPriority('ease');
             const updatedTasks = [newTask, ...todos];
@@ -38,6 +40,9 @@ const App = () => {
     };
 
     const updateTask = (updateTodo) => {
+        // Обновляем поле updatedAt при редактировании
+        updateTodo.updatedAt = new Date();
+
         setTodos(
             todos.map((todo) => (todo.id === updateTodo.id ? updateTodo : todo))
         );
@@ -110,6 +115,7 @@ const App = () => {
                 {filteredTasks.map((todo) => (
                     <Todo
                         todo={todo}
+                        createdAt={todo.createdAt}
                         key={todo.id}
                         id={todo.id}
                         tasks={todo.tasks}

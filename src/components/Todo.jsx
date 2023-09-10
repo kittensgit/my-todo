@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import EditTodoForm from './EditTodoForm';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Tooltip, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 const Todo = ({
     todo,
@@ -35,6 +36,7 @@ const Todo = ({
             sx={{
                 p: 2,
                 border: '1px dashed grey',
+                position: 'relative',
             }}
             className="todo"
         >
@@ -53,6 +55,31 @@ const Todo = ({
                         gutterBottom
                     >
                         {tasks}
+                    </Typography>
+
+                    <Typography
+                        variant="caption"
+                        sx={{
+                            position: 'absolute',
+                            bottom: 0,
+                            left: '11px',
+                            padding: '4px',
+                        }}
+                    >
+                        <Tooltip
+                            title={`Created: ${
+                                todo.createdAt
+                                    ? new Date(todo.createdAt).toLocaleString()
+                                    : 'None'
+                            } | Edited: ${
+                                todo.updatedAt
+                                    ? new Date(todo.updatedAt).toLocaleString()
+                                    : 'None'
+                            }`}
+                            placement="bottom"
+                        >
+                            <MoreHorizIcon fontSize="small" />
+                        </Tooltip>
                     </Typography>
 
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
