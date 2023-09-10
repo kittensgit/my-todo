@@ -32,8 +32,8 @@ const TodoForm = ({ addTask, clearTask, priority, changePriority }) => {
                 onKeyDown={handleKeyPress}
             />
             <SelectPriority
-                priority={priority}
-                changePriority={changePriority}
+                value={priority}
+                onChange={(e) => changePriority(e.target.value)}
             />
             <Button
                 style={{ marginRight: '20px', marginLeft: '20px' }}

@@ -1,21 +1,38 @@
-import { MenuItem, TextField } from '@mui/material';
 import React from 'react';
+import { TextField, MenuItem, Box } from '@mui/material';
 
-const SelectPriority = ({ priority, changePriority }) => {
+const SelectPriority = ({ value, onChange }) => {
+    const priorities = [
+        { value: 'high', label: 'High', color: '#ff2424' },
+        { value: 'medium', label: 'Medium', color: '#f3f320' },
+        { value: 'ease', label: 'Ease', color: '#2fbe2f' },
+    ];
+
     return (
         <TextField
-            sx={{ marginLeft: '10px', width: '110px' }}
+            sx={{ marginLeft: '10px', width: '150px' }}
             select
             label="Priority"
-            value={priority}
-            onChange={(e) => {
-                changePriority(e.target.value);
-            }}
+            value={value}
+            onChange={onChange}
             size="small"
         >
-            <MenuItem value="high">High</MenuItem>
-            <MenuItem value="medium">Medium</MenuItem>
-            <MenuItem value="ease">Ease</MenuItem>
+            {priorities.map((priority) => (
+                <MenuItem key={priority.value} value={priority.value}>
+                    <Box display="flex" alignItems="center">
+                        <div
+                            style={{
+                                width: '12px',
+                                height: '12px',
+                                backgroundColor: priority.color,
+                                borderRadius: '50%',
+                                marginRight: '8px',
+                            }}
+                        />
+                        {priority.label}
+                    </Box>
+                </MenuItem>
+            ))}
         </TextField>
     );
 };

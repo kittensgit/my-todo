@@ -67,6 +67,14 @@ input {
     transition: all 0.2s ease-in;
 }
 
+.select-circle {
+    width: 10px;
+    height: 10px;
+    margin-left: auto;
+    border-radius: 50%;
+    background-color: #222;
+    text-align: center;
+}
 .circle {
     width: 20px;
     height: 20px;

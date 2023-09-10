@@ -1,5 +1,6 @@
 import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
+import SelectPriority from './SelectPriority';
 
 const EditTodoForm = ({ todo, updateTask, toggleEdit }) => {
     const [value, setValue] = useState(todo.tasks);
@@ -33,6 +34,12 @@ const EditTodoForm = ({ todo, updateTask, toggleEdit }) => {
                 onChange={handleChange}
                 onKeyDown={handleEnter}
                 onBlur={handleBlur}
+            />
+            <SelectPriority
+                value={todo.priority}
+                onChange={(e) => {
+                    updateTask({ ...todo, priority: e.target.value });
+                }}
             />
             <Button onClick={handleSave} variant="contained">
                 save
