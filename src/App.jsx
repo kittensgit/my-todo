@@ -21,6 +21,7 @@ const App = () => {
 
     const [filter, setFilter] = useState('all');
     const [searchText, setSearchText] = useState('');
+    const [priority, setPriority] = useState('ease');
 
     useEffect(() => {
         const localTasks = JSON.parse(localStorage.getItem('tasks'));
@@ -35,7 +36,9 @@ const App = () => {
                 id: uuidv4(),
                 tasks,
                 complete: false,
+                priority: priority,
             };
+            setPriority('ease');
             const updatedTasks = [newTask, ...todos];
             setTodos(updatedTasks);
             localStorage.setItem('tasks', JSON.stringify(updatedTasks));
@@ -69,6 +72,10 @@ const App = () => {
         setTodos(todos.filter((todo) => todo.complete !== true));
     };
 
+    const changePriority = (priority) => {
+        setPriority(priority);
+    };
+
     const completedTasks = todos.filter((todo) => todo.complete);
     const progress = (completedTasks.length / todos.length) * 100;
 
@@ -91,7 +98,12 @@ const App = () => {
                 task count: {todos.length}
             </Typography>
 
-            <TodoForm addTask={addTask} clearTask={clearTask} />
+            <TodoForm
+                priority={priority}
+                addTask={addTask}
+                clearTask={clearTask}
+                changePriority={changePriority}
+            />
             <Box mt={2} sx={{ width: '400px' }}>
                 <LinearProgress variant="determinate" value={progress} />
             </Box>

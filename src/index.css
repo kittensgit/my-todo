@@ -40,7 +40,7 @@
     display: flex;
     align-items: center;
     justify-items: center;
-    gap: 100px;
+    gap: 10px;
 }
 
 input {
@@ -65,4 +65,11 @@ input {
     background-color: rgb(255, 176, 176);
     border-radius: 5px;
     transition: all 0.2s ease-in;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #222;
 }

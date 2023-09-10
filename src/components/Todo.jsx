@@ -18,7 +18,18 @@ const Todo = ({
     const toggleEdit = () => {
         setIsEdit(!isEdit);
     };
-
+    const getPriorityStyle = (priority) => {
+        switch (priority) {
+            case 'high':
+                return { backgroundColor: '#ff2424' };
+            case 'medium':
+                return { backgroundColor: '#f3f320' };
+            case 'low':
+                return { backgroundColor: '#2fbe2f' };
+            default:
+                return {};
+        }
+    };
     return (
         <Box
             sx={{
@@ -44,7 +55,13 @@ const Todo = ({
                         {tasks}
                     </Typography>
 
-                    <div>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Typography variant="caption" marginRight={2}>
+                            <div
+                                style={getPriorityStyle(todo.priority)}
+                                className="circle"
+                            ></div>
+                        </Typography>
                         <Button onClick={toggleEdit}>
                             <EditIcon />
                         </Button>
@@ -54,7 +71,7 @@ const Todo = ({
                         >
                             <DeleteIcon />
                         </Button>
-                    </div>
+                    </Box>
                 </>
             )}
         </Box>
