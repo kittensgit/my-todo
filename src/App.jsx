@@ -45,6 +45,11 @@ const App = () => {
                 todo.id === updateTodo.id ? updatedTodo : todo
             )
         );
+
+        const updatedTasks = todos.map((todo) =>
+            todo.id === updateTodo.id ? updatedTodo : todo
+        );
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     };
 
     const removeTask = (id) => {
