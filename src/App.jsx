@@ -6,10 +6,7 @@ import { Box, LinearProgress, Typography } from '@mui/material';
 import FilterTodo from './components/FilterTodo';
 
 const App = () => {
-    const [todos, setTodos] = useState([
-        { id: uuidv4(), tasks: 'go to store', complete: false },
-        { id: uuidv4(), tasks: 'to make dinner', complete: false },
-    ]);
+    const [todos, setTodos] = useState([]);
 
     const [filter, setFilter] = useState('all');
     const [searchText, setSearchText] = useState('');
@@ -30,7 +27,7 @@ const App = () => {
                 complete: false,
                 priority: priority,
                 createdAt: new Date(),
-                updateAt: null,
+                updatedAt: null,
             };
             setPriority('ease');
             const updatedTasks = [newTask, ...todos];
@@ -41,10 +38,12 @@ const App = () => {
 
     const updateTask = (updateTodo) => {
         // Обновляем поле updatedAt при редактировании
-        updateTodo.updatedAt = new Date();
+        const updatedTodo = { ...updateTodo, updatedAt: new Date() };
 
         setTodos(
-            todos.map((todo) => (todo.id === updateTodo.id ? updateTodo : todo))
+            todos.map((todo) =>
+                todo.id === updateTodo.id ? updatedTodo : todo
+            )
         );
     };
 

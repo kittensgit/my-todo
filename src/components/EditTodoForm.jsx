@@ -10,7 +10,7 @@ const EditTodoForm = ({ todo, updateTask, toggleEdit }) => {
     };
 
     const handleSave = () => {
-        updateTask({ ...todo, tasks: value, createdAt: new Date() });
+        updateTask({ ...todo, tasks: value });
         toggleEdit();
     };
 
