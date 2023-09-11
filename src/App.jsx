@@ -12,6 +12,8 @@ const App = () => {
     const [searchText, setSearchText] = useState('');
     const [priority, setPriority] = useState('ease');
 
+    const [sortOrder, setSortOrder] = useState('asc');
+
     useEffect(() => {
         const localTasks = JSON.parse(localStorage.getItem('tasks'));
         if (localTasks) {
@@ -80,18 +82,65 @@ const App = () => {
     const completedTasks = todos.filter((todo) => todo.complete);
     const progress = (completedTasks.length / todos.length) * 100;
 
-    const filteredTasks = todos.filter((todo) => {
-        //filter task
-        if (filter === 'completed') {
-            return todo.complete;
-        } else if (filter === 'uncompleted') {
-            return !todo.complete;
-        }
-        //search task
-        const textTask = todo.tasks.toLocaleLowerCase();
-        const searchTextTaskLower = searchText.toLocaleLowerCase();
-        return textTask.includes(searchTextTaskLower);
-    });
+    // const filteredTasks = todos.filter((todo) => {
+    //     //filter task
+    //     if (filter === 'completed') {
+    //         return todo.complete;
+    //     } else if (filter === 'uncompleted') {
+    //         return !todo.complete;
+    //     }
+    //     //search task
+    //     const textTask = todo.tasks.toLocaleLowerCase();
+    //     const searchTextTaskLower = searchText.toLocaleLowerCase();
+    //     return textTask.includes(searchTextTaskLower);
+    // });
+
+    const filterSortSearchTasks = (tasks, filter, searchText, sortOrder) => {
+        const filteredTasks = tasks.filter((task) => {
+            if (filter === 'completed') {
+                return task.complete;
+            } else if (filter === 'uncompleted') {
+                return !task.complete;
+            }
+
+            const textTask = task.tasks.toLowerCase();
+            const searchTextLowerCase = searchText.toLowerCase();
+            return textTask.includes(searchTextLowerCase);
+        });
+
+        filteredTasks.sort((a, b) => {
+            if (sortOrder === 'asc') {
+                // Сначала сравниваем по приоритету
+                if (a.priority === b.priority) {
+                    // Если приоритеты совпадают, то сравниваем по времени создания
+                    return new Date(a.createdAt) - new Date(b.createdAt);
+                }
+                return (
+                    ['ease', 'medium', 'high'].indexOf(a.priority) -
+                    ['ease', 'medium', 'high'].indexOf(b.priority)
+                );
+            } else if (sortOrder === 'desc') {
+                // Сначала сравниваем по приоритету
+                if (a.priority === b.priority) {
+                    // Если приоритеты совпадают, то сравниваем по времени создания
+                    return new Date(b.createdAt) - new Date(a.createdAt);
+                }
+                return (
+                    ['ease', 'medium', 'high'].indexOf(b.priority) -
+                    ['ease', 'medium', 'high'].indexOf(a.priority)
+                );
+            }
+        });
+
+        return filteredTasks;
+    };
+
+    const filteredAndSortedTasks = filterSortSearchTasks(
+        todos,
+        filter,
+        searchText,
+        sortOrder
+    );
 
     return (
         <div className="App">
@@ -113,10 +162,11 @@ const App = () => {
                 setFilter={setFilter}
                 searchText={searchText}
                 setSearchText={setSearchText}
+                setSortOrder={setSortOrder}
             />
 
             <Box marginBottom={'50px'}>
-                {filteredTasks.map((todo) => (
+                {filteredAndSortedTasks.map((todo) => (
                     <Todo
                         todo={todo}
                         createdAt={todo.createdAt}
