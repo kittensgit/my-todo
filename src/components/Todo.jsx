@@ -25,7 +25,7 @@ const Todo = ({
                 return { backgroundColor: '#ff2424' };
             case 'medium':
                 return { backgroundColor: '#f3f320' };
-            case 'ease':
+            case 'easy':
                 return { backgroundColor: '#2fbe2f' };
             default:
                 return {};

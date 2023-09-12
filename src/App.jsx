@@ -10,7 +10,7 @@ const App = () => {
 
     const [filter, setFilter] = useState('all');
     const [searchText, setSearchText] = useState('');
-    const [priority, setPriority] = useState('ease');
+    const [priority, setPriority] = useState('easy');
 
     const [sortOrder, setSortOrder] = useState('asc');
 
@@ -31,7 +31,7 @@ const App = () => {
                 createdAt: new Date(),
                 updatedAt: null,
             };
-            setPriority('ease');
+            setPriority('easy');
             const updatedTasks = [newTask, ...todos];
             setTodos(updatedTasks);
             localStorage.setItem('tasks', JSON.stringify(updatedTasks));
@@ -82,59 +82,61 @@ const App = () => {
     const completedTasks = todos.filter((todo) => todo.complete);
     const progress = (completedTasks.length / todos.length) * 100;
 
-    // const filteredTasks = todos.filter((todo) => {
-    //     //filter task
-    //     if (filter === 'completed') {
-    //         return todo.complete;
-    //     } else if (filter === 'uncompleted') {
-    //         return !todo.complete;
-    //     }
-    //     //search task
-    //     const textTask = todo.tasks.toLocaleLowerCase();
-    //     const searchTextTaskLower = searchText.toLocaleLowerCase();
-    //     return textTask.includes(searchTextTaskLower);
-    // });
+    // Функция для фильтрации задач по параметрам filter
+    const filterTasksByFilter = (tasks, filter) => {
+        if (filter === 'completed') {
+            return tasks.filter((task) => task.complete);
+        } else if (filter === 'uncompleted') {
+            return tasks.filter((task) => !task.complete);
+        }
+        return tasks; // иначе верни все таски
+    };
 
-    const filterSortSearchTasks = (tasks, filter, searchText, sortOrder) => {
-        const filteredTasks = tasks.filter((task) => {
-            if (filter === 'completed') {
-                return task.complete;
-            } else if (filter === 'uncompleted') {
-                return !task.complete;
-            }
-
+    // Функция для фильтрации задач по тексту поиска
+    const filterTasksBySearchText = (tasks, searchText) => {
+        const searchTextLowerCase = searchText.toLowerCase();
+        return tasks.filter((task) => {
             const textTask = task.tasks.toLowerCase();
-            const searchTextLowerCase = searchText.toLowerCase();
-            return textTask.includes(searchTextLowerCase);
+            return textTask.includes(searchTextLowerCase); // верни таску елси она содержит поисковый текст
         });
+    };
 
-        filteredTasks.sort((a, b) => {
+    // Функция для сортировки задач по параметру sortOrder
+    const sortTasks = (tasks, sortOrder) => {
+        const priorities = ['easy', 'medium', 'high'];
+        return tasks.sort((a, b) => {
             if (sortOrder === 'asc') {
-                // Сначала сравниваем по приоритету
                 if (a.priority === b.priority) {
-                    // Если приоритеты совпадают, то сравниваем по времени создания
                     return new Date(a.createdAt) - new Date(b.createdAt);
                 }
                 return (
-                    ['ease', 'medium', 'high'].indexOf(a.priority) -
-                    ['ease', 'medium', 'high'].indexOf(b.priority)
+                    priorities.indexOf(a.priority) -
+                    priorities.indexOf(b.priority)
                 );
             } else if (sortOrder === 'desc') {
-                // Сначала сравниваем по приоритету
                 if (a.priority === b.priority) {
-                    // Если приоритеты совпадают, то сравниваем по времени создания
                     return new Date(b.createdAt) - new Date(a.createdAt);
                 }
                 return (
-                    ['ease', 'medium', 'high'].indexOf(b.priority) -
-                    ['ease', 'medium', 'high'].indexOf(a.priority)
+                    priorities.indexOf(b.priority) -
+                    priorities.indexOf(a.priority)
                 );
             }
         });
-
-        return filteredTasks;
     };
 
+    // Основная функция для фильтрации, сортировки и поиска задач
+    const filterSortSearchTasks = (tasks, filter, searchText, sortOrder) => {
+        const tasksFilteredByFilter = filterTasksByFilter(tasks, filter);
+        const tasksFilteredBySearchText = filterTasksBySearchText(
+            tasksFilteredByFilter,
+            searchText
+        );
+        const sortedTasks = sortTasks(tasksFilteredBySearchText, sortOrder);
+        return sortedTasks;
+    };
+
+    // Пример использования
     const filteredAndSortedTasks = filterSortSearchTasks(
         todos,
         filter,

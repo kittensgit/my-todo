@@ -5,7 +5,7 @@ const SelectPriority = ({ value, onChange }) => {
     const priorities = [
         { value: 'high', label: 'High', color: '#ff2424' },
         { value: 'medium', label: 'Medium', color: '#f3f320' },
-        { value: 'ease', label: 'Ease', color: '#2fbe2f' },
+        { value: 'easy', label: 'Easy', color: '#2fbe2f' },
     ];
 
     return (
