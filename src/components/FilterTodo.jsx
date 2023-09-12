@@ -1,10 +1,25 @@
 import React from 'react';
 import SearchTodo from './SearchTodo';
 import { Box, Button } from '@mui/material';
+import SortTodo from './SortTodo';
 
-const FilterTodo = ({ setFilter, searchText, setSearchText, setSortOrder }) => {
+const FilterTodo = ({
+    setFilter,
+    searchText,
+    setSearchText,
+    sortOrder,
+    setSortOrder,
+}) => {
     return (
-        <Box mt={2} sx={{ display: 'flex', gap: '10px' }}>
+        <Box
+            mt={2}
+            sx={{
+                display: 'flex',
+                gap: '10px',
+                marginLeft: '20px',
+                marginRight: '20px',
+            }}
+        >
             <Button
                 variant="contained"
                 onClick={() => {
@@ -30,10 +45,8 @@ const FilterTodo = ({ setFilter, searchText, setSearchText, setSortOrder }) => {
                 Uncompleted
             </Button>
             <SearchTodo searchText={searchText} setSearchText={setSearchText} />
-            <Button onClick={() => setSortOrder('asc')}>sort ascending</Button>
-            <Button onClick={() => setSortOrder('desc')}>
-                sort descending
-            </Button>
+
+            <SortTodo sortOrder={sortOrder} setSortOrder={setSortOrder} />
         </Box>
     );
 };

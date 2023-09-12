@@ -122,6 +122,7 @@ const App = () => {
                     priorities.indexOf(a.priority)
                 );
             }
+            return 0; // Добавляем возврат 0 для случая, когда sortOrder не равен 'asc' или 'desc'
         });
     };
 
@@ -164,6 +165,7 @@ const App = () => {
                 setFilter={setFilter}
                 searchText={searchText}
                 setSearchText={setSearchText}
+                sortOrder={sortOrder}
                 setSortOrder={setSortOrder}
             />
 
