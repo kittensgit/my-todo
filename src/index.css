@@ -16,7 +16,7 @@
     align-items: center;
     justify-content: space-between;
     border-radius: 5px;
-    padding: 15px;
+    padding: 20px;
     margin-top: 20px;
     width: 400px;
 }
@@ -24,6 +24,7 @@
 .complete {
     text-decoration: line-through;
     user-select: none;
+    opacity: 0.8;
 }
 
 .form {

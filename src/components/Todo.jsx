@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import EditTodoForm from './EditTodoForm';
-import { Box, Button, Tooltip, Typography } from '@mui/material';
+import { Box, Button, Checkbox, Tooltip, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const Todo = ({
     todo,
@@ -15,6 +17,10 @@ const Todo = ({
     updateTask,
 }) => {
     const [isEdit, setIsEdit] = useState(false);
+
+    const handleNameClick = () => {
+        toggleTodo(id);
+    };
 
     const toggleEdit = () => {
         setIsEdit(!isEdit);
@@ -48,21 +54,30 @@ const Todo = ({
                 />
             ) : (
                 <>
-                    <Typography
-                        className={complete ? 'complete' : ''}
-                        onClick={() => toggleTodo(id)}
-                        variant="subtitle1"
-                        gutterBottom
-                    >
-                        {tasks}
-                    </Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Checkbox
+                            icon={<CheckCircleOutlineIcon />}
+                            checkedIcon={<CheckCircleIcon />}
+                            onClick={handleNameClick}
+                            checked={complete}
+                        />
+                        <Typography
+                            sx={{ fontSize: '20px', color: '#2f2a2a' }}
+                            className={complete ? 'complete' : ''}
+                            onClick={handleNameClick}
+                            variant="subtitle1"
+                            role="button"
+                        >
+                            {tasks}
+                        </Typography>
+                    </Box>
 
                     <Typography
                         variant="caption"
                         sx={{
                             position: 'absolute',
-                            bottom: 0,
-                            left: '11px',
+                            top: '5px',
+                            right: '0px',
                             padding: '4px',
                         }}
                     >
@@ -76,9 +91,9 @@ const Todo = ({
                                     ? new Date(todo.updatedAt).toLocaleString()
                                     : 'None'
                             }`}
-                            placement="bottom"
+                            placement="right"
                         >
-                            <MoreHorizIcon fontSize="small" />
+                            <MoreVertIcon fontSize="small" />
                         </Tooltip>
                     </Typography>
 
