@@ -19,31 +19,34 @@ const FilterTodo = ({
                 marginLeft: '20px',
                 marginRight: '20px',
             }}
+            className="filtertodo"
         >
-            <Button
-                variant="contained"
-                onClick={() => {
-                    setFilter('all');
-                }}
-            >
-                All
-            </Button>
-            <Button
-                variant="contained"
-                onClick={() => {
-                    setFilter('completed');
-                }}
-            >
-                Completed
-            </Button>
-            <Button
-                variant="contained"
-                onClick={() => {
-                    setFilter('uncompleted');
-                }}
-            >
-                Uncompleted
-            </Button>
+            <Box className="buttonsfilter">
+                <Button
+                    variant="contained"
+                    onClick={() => {
+                        setFilter('all');
+                    }}
+                >
+                    All
+                </Button>
+                <Button
+                    variant="contained"
+                    onClick={() => {
+                        setFilter('completed');
+                    }}
+                >
+                    Completed
+                </Button>
+                <Button
+                    variant="contained"
+                    onClick={() => {
+                        setFilter('uncompleted');
+                    }}
+                >
+                    Uncompleted
+                </Button>
+            </Box>
             <SearchTodo searchText={searchText} setSearchText={setSearchText} />
 
             <SortTodo sortOrder={sortOrder} setSortOrder={setSortOrder} />

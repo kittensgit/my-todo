@@ -6,7 +6,7 @@ const SortTodo = ({ sortOrder, setSortOrder }) => {
         setSortOrder(e.target.value);
     };
     return (
-        <FormControl>
+        <FormControl sx={{ marginRight: '10px' }}>
             <InputLabel htmlFor="sortOrderSelect">Sort Order</InputLabel>
             <Select
                 label="Sort Order"

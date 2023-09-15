@@ -147,7 +147,7 @@ const App = () => {
 
     return (
         <div className="App">
-            <Typography variant="h2" gutterBottom>
+            <Typography variant="h2" gutterBottom mt={2}>
                 Task count: {todos.length}
             </Typography>
 
@@ -157,7 +157,7 @@ const App = () => {
                 clearTask={clearTask}
                 changePriority={changePriority}
             />
-            <Box mt={2} sx={{ width: '400px' }}>
+            <Box mt={2} sx={{ width: '50%' }}>
                 <LinearProgress variant="determinate" value={progress} />
             </Box>
 

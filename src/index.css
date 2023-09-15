@@ -31,6 +31,11 @@
     margin-top: 12px;
 }
 
+.addbutton {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
 .todoform {
     display: flex;
     align-items: center;
@@ -41,6 +46,12 @@
     display: flex;
     align-items: center;
     justify-items: center;
+    gap: 10px;
+}
+
+.buttonsfilter {
+    display: flex;
+    align-items: center;
     gap: 10px;
 }
 
@@ -81,4 +92,24 @@ input {
     height: 20px;
     border-radius: 50%;
     background-color: #222;
+}
+
+@media (max-width: 698px) {
+    .todoform {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .addbutton {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .filtertodo {
+        flex-direction: column;
+        align-items: center;
+    }
+    .buttonsfilter {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
 }

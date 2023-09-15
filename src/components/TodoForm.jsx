@@ -36,6 +36,7 @@ const TodoForm = ({ addTask, clearTask, priority, changePriority }) => {
                 onChange={(e) => changePriority(e.target.value)}
             />
             <Button
+                className="addbutton"
                 style={{ marginRight: '20px', marginLeft: '20px' }}
                 onClick={addTodo}
                 variant="contained"
