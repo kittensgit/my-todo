@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
+import MealForm from './MealForm';
 
 const Breakfast = () => {
     const food = [
@@ -19,6 +20,7 @@ const Breakfast = () => {
     return (
         <Box mx={2} mt={2}>
             <Typography variant="h2">Breakfast</Typography>
+            <MealForm />
             <Box>
                 {food.map((f) => (
                     <Typography
