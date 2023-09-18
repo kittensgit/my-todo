@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Tab, Tabs, Typography } from '@mui/material';
+import { Tab, Tabs } from '@mui/material';
 import TodoPage from './components/pages/TodoPage';
 import { Link, Route, Routes } from 'react-router-dom';
+import CaloriePage from './components/pages/CaloriePage';
 
 const App = () => {
     const [value, setValue] = useState(0);
@@ -16,7 +17,7 @@ const App = () => {
             </Tabs>
             <Routes>
                 <Route path="/" element={<TodoPage />} />
-                <Route path="/calorie" element={<div>Страница 1</div>} />
+                <Route path="/calorie" element={<CaloriePage />} />
             </Routes>
         </div>
     );
