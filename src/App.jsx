@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Tab, Tabs } from '@mui/material';
+import { Button, Tab, Tabs, Typography } from '@mui/material';
 import TodoPage from './components/pages/TodoPage';
+import { Link, Route, Routes } from 'react-router-dom';
 
 const App = () => {
     const [value, setValue] = useState(0);
@@ -10,12 +11,13 @@ const App = () => {
     return (
         <div>
             <Tabs value={value} onChange={handleChange} aria-label="My Tabs">
-                <Tab label="TodoList" />
-                <Tab label="Calorie counter" />
+                <Tab label="TodoList" component={Link} to="/" />
+                <Tab label="Calorie Counter" component={Link} to="/calorie" />
             </Tabs>
-            {/* Содержимое активной вкладки */}
-            {value === 0 && <TodoPage />}
-            {value === 1 && <div>Содержимое вкладки 2</div>}
+            <Routes>
+                <Route path="/" element={<TodoPage />} />
+                <Route path="/calorie" element={<div>Страница 1</div>} />
+            </Routes>
         </div>
     );
 };
