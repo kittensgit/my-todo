@@ -1,34 +1,27 @@
 import { Box, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import MealForm from './MealForm';
 
 const Breakfast = () => {
-    const food = [
-        {
-            name: 'soup',
-            calorie: 66,
-        },
-        {
-            name: 'cake',
-            calorie: 344,
-        },
-        {
-            name: 'salad',
-            calorie: 159,
-        },
-    ];
+    const [selectedFoodList, setSelectedFoodList] = useState([]);
+
+    const addMeal = (meal) => {
+        setSelectedFoodList([...selectedFoodList, meal]);
+    };
+
     return (
         <Box mx={2} mt={2}>
             <Typography variant="h2">Breakfast</Typography>
-            <MealForm />
+            <MealForm onAddMeal={addMeal} />
             <Box>
-                {food.map((f) => (
+                {selectedFoodList.map((meal) => (
                     <Typography
+                        key={meal.id}
                         mt={2}
-                        className="todo"
-                        sx={{ border: '1px dashed #000' }}
+                        className="meal"
+                        sx={{ border: '1px dashed #000', padding: '10px' }}
                     >
-                        {f.name}
+                        {meal.name} - {meal.weight} - {meal.calorie} calorie
                     </Typography>
                 ))}
             </Box>
