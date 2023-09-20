@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import MealForm from './MealForm';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -8,9 +8,18 @@ import { v4 as uuidv4 } from 'uuid';
 const Breakfast = () => {
     const [selectedFoodList, setSelectedFoodList] = useState([]);
 
+    useEffect(() => {
+        const localMeal = JSON.parse(localStorage.getItem('meal'));
+        if (localMeal) {
+            setSelectedFoodList(localMeal);
+        }
+    }, []);
+
     const addMeal = (meal) => {
         const newMeal = { ...meal, id: uuidv4() };
-        setSelectedFoodList([...selectedFoodList, newMeal]);
+        const updatedMeal = [...selectedFoodList, newMeal];
+        setSelectedFoodList(updatedMeal);
+        localStorage.setItem('meal', JSON.stringify(updatedMeal));
     };
 
     const deleteMeal = (idMeal) => {
@@ -19,6 +28,10 @@ const Breakfast = () => {
                 (selectedFood) => selectedFood.id !== idMeal
             )
         );
+    };
+
+    const calorieMeal = (weight, calorie) => {
+        return Math.round((weight * calorie) / 100);
     };
 
     return (
@@ -40,7 +53,8 @@ const Breakfast = () => {
                             width: '400px',
                         }}
                     >
-                        {meal.name} - {meal.weight} - {meal.calorie} calorie
+                        {meal.name} - {meal.weight} gramm -{' '}
+                        {calorieMeal(meal.weight, meal.calorie)} calorie
                         <Button onClick={() => deleteMeal(meal.id)}>
                             <DeleteIcon />
                         </Button>

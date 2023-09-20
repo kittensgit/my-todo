@@ -9,17 +9,17 @@ const MealForm = ({ onAddMeal }) => {
         {
             id: uuidv4(),
             name: 'soup',
-            calorie: 66,
+            calorie: 53,
         },
         {
             id: uuidv4(),
             name: 'cake',
-            calorie: 344,
+            calorie: 372,
         },
         {
             id: uuidv4(),
             name: 'salad',
-            calorie: 159,
+            calorie: 180,
         },
     ];
 
