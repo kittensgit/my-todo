@@ -2,24 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import MealForm from './MealForm';
 import DeleteIcon from '@mui/icons-material/Delete';
-
 import { v4 as uuidv4 } from 'uuid';
 
-const Breakfast = () => {
+const Meal = ({ mealName }) => {
     const [selectedFoodList, setSelectedFoodList] = useState([]);
 
     useEffect(() => {
-        const localMeal = JSON.parse(localStorage.getItem('meal'));
+        const localMeal = JSON.parse(localStorage.getItem(`meal_${mealName}`));
         if (localMeal) {
             setSelectedFoodList(localMeal);
         }
-    }, []);
+    }, [mealName]);
 
     const addMeal = (meal) => {
         const newMeal = { ...meal, id: uuidv4() };
         const updatedMeal = [...selectedFoodList, newMeal];
         setSelectedFoodList(updatedMeal);
-        localStorage.setItem('meal', JSON.stringify(updatedMeal));
+        localStorage.setItem(`meal_${mealName}`, JSON.stringify(updatedMeal));
     };
 
     const deleteMeal = (idMeal) => {
@@ -36,7 +35,7 @@ const Breakfast = () => {
 
     return (
         <Box mx={2} mt={2}>
-            <Typography variant="h2">Breakfast</Typography>
+            <Typography variant="h2">{mealName}</Typography>
             <MealForm onAddMeal={addMeal} />
             <Box>
                 {selectedFoodList.map((meal) => (
@@ -50,7 +49,7 @@ const Breakfast = () => {
                             justifyContent: 'space-between',
                             border: '1px dashed #000',
                             padding: '10px',
-                            width: '400px',
+                            width: '360px',
                         }}
                     >
                         {meal.name} - {meal.weight} gramm -{' '}
@@ -65,4 +64,4 @@ const Breakfast = () => {
     );
 };
 
-export default Breakfast;
+export default Meal;

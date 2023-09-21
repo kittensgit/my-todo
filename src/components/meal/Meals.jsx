@@ -1,11 +1,19 @@
 import { Box } from '@mui/material';
 import React from 'react';
-import Breakfast from './Breakfast';
+import Meal from './Meal';
 
 const Meals = () => {
     return (
-        <Box>
-            <Breakfast />
+        <Box
+            sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                padding: '0 30px',
+            }}
+        >
+            <Meal mealName={'Breakfast'} />
+            <Meal mealName={'Lunch'} />
+            <Meal mealName={'Dinner'} />
         </Box>
     );
 };
