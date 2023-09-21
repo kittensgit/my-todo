@@ -1,9 +1,9 @@
 import { Box, LinearProgress, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import TodoForm from '../TodoForm';
-import FilterTodo from '../FilterTodo';
-import TodoList from '../TodoList';
+import TodoForm from '../todoList/TodoForm';
+import FilterTodo from '../todoList/FilterTodo';
+import TodoList from '../todoList/TodoList';
 
 const TodoPage = () => {
     const [todos, setTodos] = useState([]);
