@@ -72,7 +72,9 @@ const TodoPage = () => {
     };
 
     const clearTask = () => {
-        setTodos(todos.filter((todo) => todo.complete !== true));
+        const updatedTasks = todos.filter((todo) => todo.complete !== true);
+        setTodos(updatedTasks);
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     };
 
     const changePriority = (priority) => {
