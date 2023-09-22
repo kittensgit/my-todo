@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import MealForm from './MealForm';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { v4 as uuidv4 } from 'uuid';
+import EditMealForm from './EditMealForm';
 
 const Meal = ({ mealName }) => {
     const [selectedFoodList, setSelectedFoodList] = useState([]);
+    const [isEdit, setIsEdit] = useState(false);
 
     useEffect(() => {
         const localMeal = JSON.parse(localStorage.getItem(`meal_${mealName}`));
@@ -29,8 +32,20 @@ const Meal = ({ mealName }) => {
         );
     };
 
+    const updateMeal = (updatedMeal) => {
+        setSelectedFoodList(
+            selectedFoodList.map((food) =>
+                food.id === updatedMeal.id ? updatedMeal : food
+            )
+        );
+    };
+
     const calorieMeal = (weight, calorie) => {
         return Math.round((weight * calorie) / 100);
+    };
+
+    const toggleEdit = () => {
+        setIsEdit(!isEdit);
     };
 
     return (
@@ -52,11 +67,24 @@ const Meal = ({ mealName }) => {
                             width: '360px',
                         }}
                     >
-                        {meal.name} - {meal.weight} gramm -{' '}
-                        {calorieMeal(meal.weight, meal.calorie)} calorie
-                        <Button onClick={() => deleteMeal(meal.id)}>
-                            <DeleteIcon />
-                        </Button>
+                        {isEdit ? (
+                            <EditMealForm
+                                meal={meal}
+                                updateMeal={updateMeal}
+                                toggleEdit={toggleEdit}
+                            />
+                        ) : (
+                            <>
+                                {meal.name} - {meal.weight} gramm -{' '}
+                                {calorieMeal(meal.weight, meal.calorie)} calorie
+                                <Button onClick={toggleEdit}>
+                                    <EditIcon />
+                                </Button>
+                                <Button onClick={() => deleteMeal(meal.id)}>
+                                    <DeleteIcon />
+                                </Button>
+                            </>
+                        )}
                     </Typography>
                 ))}
             </Box>
