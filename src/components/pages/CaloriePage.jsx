@@ -1,5 +1,5 @@
 import React from 'react';
-import Meals from '../meal/Meals.jsx';
+import Meals from '../meal/Meals';
 
 const CaloriePage = () => {
     return (

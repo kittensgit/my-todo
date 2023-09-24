@@ -1,27 +1,9 @@
 import React, { useState } from 'react';
 import { Box, Button, TextField, MenuItem } from '@mui/material';
-import { v4 as uuidv4 } from 'uuid';
 
-const MealForm = ({ onAddMeal }) => {
+const MealForm = ({ foods, onAddMeal }) => {
     const [selectedFood, setSelectedFood] = useState('');
     const [value, setValue] = useState('');
-    const foods = [
-        {
-            id: uuidv4(),
-            name: 'soup',
-            calorie: 53,
-        },
-        {
-            id: uuidv4(),
-            name: 'cake',
-            calorie: 372,
-        },
-        {
-            id: uuidv4(),
-            name: 'salad',
-            calorie: 180,
-        },
-    ];
 
     const handleFoodChange = (event) => {
         setSelectedFood(event.target.value);

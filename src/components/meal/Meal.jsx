@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import MealForm from './MealForm';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import { v4 as uuidv4 } from 'uuid';
-import EditMealForm from './EditMealForm';
+import MealItem from './MealItem';
 
 const Meal = ({ mealName }) => {
+    const foods = [
+        {
+            id: uuidv4(),
+            name: 'soup',
+            calorie: 53,
+        },
+        {
+            id: uuidv4(),
+            name: 'cake',
+            calorie: 372,
+        },
+        {
+            id: uuidv4(),
+            name: 'salad',
+            calorie: 180,
+        },
+    ];
     const [selectedFoodList, setSelectedFoodList] = useState([]);
-    const [isEdit, setIsEdit] = useState(false);
 
     useEffect(() => {
         const localMeal = JSON.parse(localStorage.getItem(`meal_${mealName}`));
@@ -25,18 +39,21 @@ const Meal = ({ mealName }) => {
     };
 
     const deleteMeal = (idMeal) => {
-        setSelectedFoodList(
-            selectedFoodList.filter(
-                (selectedFood) => selectedFood.id !== idMeal
-            )
+        const updatedMeal = selectedFoodList.filter(
+            (selectedFood) => selectedFood.id !== idMeal
         );
+        setSelectedFoodList(updatedMeal);
+        localStorage.setItem(`meal_${mealName}`, JSON.stringify(updatedMeal));
     };
 
     const updateMeal = (updatedMeal) => {
-        setSelectedFoodList(
-            selectedFoodList.map((food) =>
-                food.id === updatedMeal.id ? updatedMeal : food
-            )
+        const updatedSelectedFoodList = selectedFoodList.map((food) =>
+            food.id === updatedMeal.id ? updatedMeal : food
+        );
+        setSelectedFoodList(updatedSelectedFoodList);
+        localStorage.setItem(
+            `meal_${mealName}`,
+            JSON.stringify(updatedSelectedFoodList)
         );
     };
 
@@ -44,48 +61,20 @@ const Meal = ({ mealName }) => {
         return Math.round((weight * calorie) / 100);
     };
 
-    const toggleEdit = () => {
-        setIsEdit(!isEdit);
-    };
-
     return (
         <Box mx={2} mt={2}>
             <Typography variant="h2">{mealName}</Typography>
-            <MealForm onAddMeal={addMeal} />
+            <MealForm foods={foods} onAddMeal={addMeal} />
             <Box>
                 {selectedFoodList.map((meal) => (
-                    <Typography
+                    <MealItem
                         key={meal.id}
-                        mt={2}
-                        className="meal"
-                        sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            border: '1px dashed #000',
-                            padding: '10px',
-                            width: '360px',
-                        }}
-                    >
-                        {isEdit ? (
-                            <EditMealForm
-                                meal={meal}
-                                updateMeal={updateMeal}
-                                toggleEdit={toggleEdit}
-                            />
-                        ) : (
-                            <>
-                                {meal.name} - {meal.weight} gramm -{' '}
-                                {calorieMeal(meal.weight, meal.calorie)} calorie
-                                <Button onClick={toggleEdit}>
-                                    <EditIcon />
-                                </Button>
-                                <Button onClick={() => deleteMeal(meal.id)}>
-                                    <DeleteIcon />
-                                </Button>
-                            </>
-                        )}
-                    </Typography>
+                        foods={foods}
+                        meal={meal}
+                        deleteMeal={deleteMeal}
+                        updateMeal={updateMeal}
+                        calorieMeal={calorieMeal}
+                    />
                 ))}
             </Box>
         </Box>
