@@ -5,7 +5,14 @@ import EditMealForm from './EditMealForm';
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
-const MealItem = ({ foods, meal, deleteMeal, updateMeal, calorieMeal }) => {
+const MealItem = ({
+    foods,
+    provided,
+    meal,
+    deleteMeal,
+    updateMeal,
+    calorieMeal,
+}) => {
     const [isEdit, setIsEdit] = useState(false);
 
     const toggleEdit = () => {
@@ -24,6 +31,8 @@ const MealItem = ({ foods, meal, deleteMeal, updateMeal, calorieMeal }) => {
                 border: '1px dashed #000',
                 padding: '10px',
                 width: '360px',
+                ...provided.draggableProps,
+                ...provided.dragHandleProps, // Это для захвата элемента
             }}
         >
             {isEdit ? (

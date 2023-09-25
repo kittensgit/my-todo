@@ -29,6 +29,12 @@ const EditMealForm = ({ foods, meal, updateMeal, toggleEdit }) => {
         toggleEdit();
     };
 
+    const handleEnter = (e) => {
+        if (e.key === 'Enter') {
+            handleSave();
+        }
+    };
+
     return (
         <Box
             sx={{
@@ -51,6 +57,7 @@ const EditMealForm = ({ foods, meal, updateMeal, toggleEdit }) => {
                 label="weight"
                 value={weight}
                 onChange={handleWeight}
+                onKeyDown={handleEnter}
             />
             <Button
                 sx={{ marginTop: '10px' }}

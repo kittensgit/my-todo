@@ -36,7 +36,6 @@ const MealForm = ({ foods, onAddMeal }) => {
 
     const handleEnter = (e) => {
         if (e.key === 'Enter') {
-            e.preventDefault();
             if (value && selectedFood) {
                 addFood();
                 setSelectedFood('');
