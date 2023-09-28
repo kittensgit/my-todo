@@ -2,11 +2,11 @@ import { Button, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 
-const EditMealForm = ({ foods, meal, updateMeal, toggleEdit }) => {
+const EditMealForm = ({ foods, meal, updateFood, toggleEdit }) => {
     const [value, setValue] = useState(meal.name);
     const [weight, setWeight] = useState(meal.weight);
 
-    const handleChange = (e) => {
+    const handleChangeInput = (e) => {
         setValue(e.target.value);
     };
 
@@ -18,7 +18,7 @@ const EditMealForm = ({ foods, meal, updateMeal, toggleEdit }) => {
         if (value) {
             const mealObj = foods.find((food) => food.name === value);
             if (mealObj) {
-                updateMeal({
+                updateFood({
                     ...meal,
                     name: value,
                     calorie: mealObj.calorie,
@@ -48,7 +48,7 @@ const EditMealForm = ({ foods, meal, updateMeal, toggleEdit }) => {
                 label="Enter task"
                 variant="standard"
                 value={value}
-                onChange={handleChange}
+                onChange={handleChangeInput}
             />
             <TextField
                 sx={{ width: '120px', marginTop: '10px', marginLeft: '20px' }}

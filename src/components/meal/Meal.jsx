@@ -13,7 +13,7 @@ const Meal = ({ mealName, foods, selectedFoodList, setSelectedFoodList }) => {
         (meal) => meal.mealName === mealName
     );
 
-    const deleteMeal = (idMeal) => {
+    const deleteFood = (idMeal) => {
         const updatedMeal = selectedFoodList.filter(
             (selectedFood) => selectedFood.id !== idMeal
         );
@@ -21,7 +21,7 @@ const Meal = ({ mealName, foods, selectedFoodList, setSelectedFoodList }) => {
         localStorage.setItem(`meal_${mealName}`, JSON.stringify(updatedMeal));
     };
 
-    const updateMeal = (updatedMeal) => {
+    const updateFood = (updatedMeal) => {
         const updatedSelectedFoodList = selectedFoodList.map((food) =>
             food.id === updatedMeal.id ? updatedMeal : food
         );
@@ -32,7 +32,7 @@ const Meal = ({ mealName, foods, selectedFoodList, setSelectedFoodList }) => {
         );
     };
 
-    const calorieMeal = (weight, calorie) => {
+    const calorieFood = (weight, calorie) => {
         return Math.round((weight * calorie) / 100);
     };
 
@@ -46,9 +46,9 @@ const Meal = ({ mealName, foods, selectedFoodList, setSelectedFoodList }) => {
                             key={meal.id}
                             foods={foods}
                             meal={meal}
-                            deleteMeal={deleteMeal}
-                            updateMeal={updateMeal}
-                            calorieMeal={calorieMeal}
+                            deleteFood={deleteFood}
+                            updateFood={updateFood}
+                            calorieFood={calorieFood}
                         />
                     ))}
             </Box>

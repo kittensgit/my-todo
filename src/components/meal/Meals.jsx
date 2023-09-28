@@ -4,13 +4,15 @@ import Meal from './Meal';
 import MealForm from './MealForm';
 import { v4 as uuidv4 } from 'uuid';
 
+// Компонент Meals отображает форму приемов пищи и список выбранных блюд
 const Meals = () => {
-    const [selectedMeal, setSelectedMeal] = useState('Breakfast'); // Значение по умолчанию
-    const [selectedFood, setSelectedFood] = useState('');
-    const [value, setValue] = useState('');
-    const [selectedFoodList, setSelectedFoodList] = useState([]);
-    const [selectedMealName, setSelectedMealName] = useState('Breakfast'); // Состояние для выбранного приема пищи
+    const [selectedMeal, setSelectedMeal] = useState('Breakfast'); // Выбранный прием пищи
+    const [selectedFood, setSelectedFood] = useState(''); // Выбранное блюдо
+    const [value, setValue] = useState(''); // Введенный вес
+    const [selectedFoodList, setSelectedFoodList] = useState([]); // Список выбранных блюд
+    const [selectedMealName, setSelectedMealName] = useState('Breakfast'); // Имя выбранного приема пищи
 
+    const mealName = ['Breakfast', 'Lunch', 'Dinner'];
     const foods = [
         {
             id: uuidv4(),
@@ -29,7 +31,8 @@ const Meals = () => {
         },
     ];
 
-    const addMeal = (meal) => {
+    // Функция для добавления блюда в список
+    const addFoodToMeal = (meal) => {
         const newMeal = { ...meal, id: uuidv4(), mealName: selectedMealName }; // Добавляем имя приема пищи к блюду
         debugger;
         setSelectedFoodList((prevList) => [...prevList, newMeal]);
@@ -39,7 +42,8 @@ const Meals = () => {
         );
     };
 
-    const addFood = () => {
+    // Функция для добавления выбранного блюда
+    const addSelectedFood = () => {
         if (selectedFood) {
             const selectedFoodObj = foods.find(
                 (food) => food.name === selectedFood
@@ -50,7 +54,7 @@ const Meals = () => {
                     calorie: selectedFoodObj.calorie,
                     weight: value || 0,
                 };
-                addMeal(mealObj);
+                addFoodToMeal(mealObj);
             }
         }
     };
@@ -64,7 +68,7 @@ const Meals = () => {
             }}
         >
             <MealForm
-                addFood={addFood}
+                addSelectedFood={addSelectedFood}
                 selectedFood={selectedFood}
                 setSelectedFood={setSelectedFood}
                 value={value}
@@ -82,27 +86,16 @@ const Meals = () => {
                     justifyContent: 'space-between',
                 }}
             >
-                <Meal
-                    mealName={'Breakfast'}
-                    foods={foods}
-                    selectedFoodList={selectedFoodList}
-                    selectedMealName={selectedMealName} // Передаем выбранное имя приема пищи
-                    setSelectedFoodList={setSelectedFoodList}
-                />
-                <Meal
-                    mealName={'Lunch'}
-                    foods={foods}
-                    selectedFoodList={selectedFoodList}
-                    selectedMealName={selectedMealName} // Передаем выбранное имя приема пищи
-                    setSelectedFoodList={setSelectedFoodList}
-                />
-                <Meal
-                    mealName={'Dinner'}
-                    foods={foods}
-                    selectedFoodList={selectedFoodList}
-                    selectedMealName={selectedMealName} // Передаем выбранное имя приема пищи
-                    setSelectedFoodList={setSelectedFoodList}
-                />
+                {mealName.map((item) => (
+                    <Meal
+                        key={item}
+                        mealName={item}
+                        foods={foods}
+                        selectedFoodList={selectedFoodList}
+                        selectedMealName={selectedMealName} // Передаем выбранное имя приема пищи
+                        setSelectedFoodList={setSelectedFoodList}
+                    />
+                ))}
             </Box>
         </Box>
     );

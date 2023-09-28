@@ -9,9 +9,14 @@ const App = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const savedValue = localStorage.getItem('selectedTab');
-        if (savedValue) {
-            setValue(Number(savedValue));
+        // Получаем текущий путь из объекта window.location
+        const currentPath = window.location.pathname;
+
+        // Устанавливаем значение value в зависимости от текущего пути
+        if (currentPath === '/') {
+            setValue(0);
+        } else if (currentPath === '/calorie') {
+            setValue(1);
         }
     }, []);
 

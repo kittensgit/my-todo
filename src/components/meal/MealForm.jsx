@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Button, TextField, MenuItem } from '@mui/material';
 
+// Компонент MealForm содержит форму для добавления блюд в список приемов пищи
 const MealForm = ({
     foods,
-    addFood,
+    addSelectedFood,
     setSelectedFood,
     selectedFood,
     value,
@@ -22,7 +23,7 @@ const MealForm = ({
     };
 
     const handleAddClick = () => {
-        addFood();
+        addSelectedFood();
         setSelectedFood('');
         setValue('');
         setSelectedMealName(selectedMeal); // Обновляем имя приема пищи
@@ -32,7 +33,7 @@ const MealForm = ({
         if (e.key === 'Enter') {
             e.preventDefault();
             if (value && selectedFood) {
-                addFood();
+                addSelectedFood();
                 setSelectedFood('');
                 setValue('');
                 setSelectedMealName(selectedMeal); // Обновляем имя приема пищи
