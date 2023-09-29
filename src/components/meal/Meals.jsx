@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Button, TextField, Typography, Checkbox } from '@mui/material';
 import Meal from './Meal';
 import MealForm from './MealForm';
 import { v4 as uuidv4 } from 'uuid';
+// import { CheckBox } from '@mui/icons-material';
 
 // Компонент Meals отображает форму приемов пищи и список выбранных блюд
 const Meals = () => {
@@ -12,7 +13,6 @@ const Meals = () => {
     const [selectedFoodList, setSelectedFoodList] = useState([]); // Список выбранных блюд
     const [selectedMealName, setSelectedMealName] = useState('Breakfast'); // Имя выбранного приема пищи
 
-    const mealName = ['Breakfast', 'Lunch', 'Dinner'];
     const foods = [
         {
             id: uuidv4(),
@@ -33,13 +33,19 @@ const Meals = () => {
 
     // Функция для добавления блюда в список
     const addFoodToMeal = (meal) => {
-        const newMeal = { ...meal, id: uuidv4(), mealName: selectedMealName }; // Добавляем имя приема пищи к блюду
-        debugger;
-        setSelectedFoodList((prevList) => [...prevList, newMeal]);
-        localStorage.setItem(
-            `meal_${selectedMealName}`,
-            JSON.stringify([...selectedFoodList, newMeal])
-        );
+        if (selectedFoodList) {
+            const newMeal = {
+                ...meal,
+                id: uuidv4(),
+                mealName: selectedMealName,
+            };
+            const updatedFoodList = [...selectedFoodList, newMeal];
+            setSelectedFoodList(updatedFoodList);
+            localStorage.setItem(
+                `meal_${selectedMealName}`,
+                JSON.stringify(updatedFoodList)
+            );
+        }
     };
 
     // Функция для добавления выбранного блюда
@@ -86,16 +92,27 @@ const Meals = () => {
                     justifyContent: 'space-between',
                 }}
             >
-                {mealName.map((item) => (
-                    <Meal
-                        key={item}
-                        mealName={item}
-                        foods={foods}
-                        selectedFoodList={selectedFoodList}
-                        selectedMealName={selectedMealName} // Передаем выбранное имя приема пищи
-                        setSelectedFoodList={setSelectedFoodList}
-                    />
-                ))}
+                <Meal
+                    mealName={'Breakfast'}
+                    foods={foods}
+                    selectedFoodList={selectedFoodList}
+                    selectedMealName={selectedMealName} // Передаем выбранное имя приема пищи
+                    setSelectedFoodList={setSelectedFoodList}
+                />
+                <Meal
+                    mealName={'Lunch'}
+                    foods={foods}
+                    selectedFoodList={selectedFoodList}
+                    selectedMealName={selectedMealName} // Передаем выбранное имя приема пищи
+                    setSelectedFoodList={setSelectedFoodList}
+                />
+                <Meal
+                    mealName={'Dinner'}
+                    foods={foods}
+                    selectedFoodList={selectedFoodList}
+                    selectedMealName={selectedMealName} // Передаем выбранное имя приема пищи
+                    setSelectedFoodList={setSelectedFoodList}
+                />
             </Box>
         </Box>
     );
