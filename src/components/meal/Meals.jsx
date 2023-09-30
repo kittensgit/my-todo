@@ -6,13 +6,14 @@ import { v4 as uuidv4 } from 'uuid';
 // import { CheckBox } from '@mui/icons-material';
 
 // Компонент Meals отображает форму приемов пищи и список выбранных блюд
-const Meals = () => {
+const Meals = ({ changeEatenCalorie }) => {
     const [selectedMeal, setSelectedMeal] = useState('Breakfast'); // Выбранный прием пищи
     const [selectedFood, setSelectedFood] = useState(''); // Выбранное блюдо
     const [value, setValue] = useState(''); // Введенный вес
     const [selectedFoodList, setSelectedFoodList] = useState([]); // Список выбранных блюд
     const [selectedMealName, setSelectedMealName] = useState('Breakfast'); // Имя выбранного приема пищи
 
+    const mealNames = ['Breakfast', 'Lunch', 'Dinner'];
     const foods = [
         {
             id: uuidv4(),
@@ -31,6 +32,10 @@ const Meals = () => {
         },
     ];
 
+    const calorieFood = (weight, calorie) => {
+        return Math.round((weight * calorie) / 100);
+    };
+
     // Функция для добавления блюда в список
     const addFoodToMeal = (meal) => {
         if (selectedFoodList) {
@@ -48,19 +53,30 @@ const Meals = () => {
         }
     };
 
-    // Функция для добавления выбранного блюда
     const addSelectedFood = () => {
+        // Проверяем, выбрана ли какая-либо пища
         if (selectedFood) {
+            // Находим объект выбранной пищи в массиве foods
             const selectedFoodObj = foods.find(
                 (food) => food.name === selectedFood
             );
+
+            // Если найден объект выбранной пищи
             if (selectedFoodObj) {
+                // Создаем объект для еды в приеме пищи с именем, калориями и весом
                 const mealObj = {
                     name: selectedFood,
                     calorie: selectedFoodObj.calorie,
-                    weight: value || 0,
+                    weight: value || 0, // value -  это вес
+                    calculatedCalories: calorieFood(
+                        value || 0,
+                        selectedFoodObj.calorie
+                    ),
                 };
+
+                // Вызываем функцию для добавления еды в прием пищи
                 addFoodToMeal(mealObj);
+                changeEatenCalorie(mealObj.calculatedCalories);
             }
         }
     };
@@ -92,27 +108,17 @@ const Meals = () => {
                     justifyContent: 'space-between',
                 }}
             >
-                <Meal
-                    mealName={'Breakfast'}
-                    foods={foods}
-                    selectedFoodList={selectedFoodList}
-                    selectedMealName={selectedMealName} // Передаем выбранное имя приема пищи
-                    setSelectedFoodList={setSelectedFoodList}
-                />
-                <Meal
-                    mealName={'Lunch'}
-                    foods={foods}
-                    selectedFoodList={selectedFoodList}
-                    selectedMealName={selectedMealName} // Передаем выбранное имя приема пищи
-                    setSelectedFoodList={setSelectedFoodList}
-                />
-                <Meal
-                    mealName={'Dinner'}
-                    foods={foods}
-                    selectedFoodList={selectedFoodList}
-                    selectedMealName={selectedMealName} // Передаем выбранное имя приема пищи
-                    setSelectedFoodList={setSelectedFoodList}
-                />
+                {mealNames.map((mealName) => (
+                    <Meal
+                        key={mealName} // Важно добавить ключ для каждого компонента в маппинге
+                        mealName={mealName}
+                        foods={foods}
+                        selectedFoodList={selectedFoodList}
+                        selectedMealName={selectedMealName}
+                        setSelectedFoodList={setSelectedFoodList}
+                        changeEatenCalorie={changeEatenCalorie}
+                    />
+                ))}
             </Box>
         </Box>
     );

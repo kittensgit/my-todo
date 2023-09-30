@@ -2,7 +2,13 @@ import React, { useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import MealItem from './MealItem';
 
-const Meal = ({ mealName, foods, selectedFoodList, setSelectedFoodList }) => {
+const Meal = ({
+    mealName,
+    foods,
+    selectedFoodList,
+    setSelectedFoodList,
+    changeEatenCalorie,
+}) => {
     useEffect(() => {
         const localMeal = JSON.parse(localStorage.getItem(`meal_${mealName}`));
         if (localMeal) {
@@ -30,10 +36,7 @@ const Meal = ({ mealName, foods, selectedFoodList, setSelectedFoodList }) => {
             `meal_${mealName}`,
             JSON.stringify(updatedSelectedFoodList)
         );
-    };
-
-    const calorieFood = (weight, calorie) => {
-        return Math.round((weight * calorie) / 100);
+        changeEatenCalorie(updatedMeal.calculatedCalories);
     };
 
     return (
@@ -48,7 +51,6 @@ const Meal = ({ mealName, foods, selectedFoodList, setSelectedFoodList }) => {
                             meal={meal}
                             deleteFood={deleteFood}
                             updateFood={updateFood}
-                            calorieFood={calorieFood}
                         />
                     ))}
             </Box>

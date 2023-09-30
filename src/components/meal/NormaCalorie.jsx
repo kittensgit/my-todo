@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 
-const NormaCalorie = () => {
+const NormaCalorie = ({ eatenCalorie }) => {
     const [normaCalorie, setNormaCalorie] = useState(0);
     const [isMenChecked, setIsMenChecked] = useState(false);
     const [isWomenChecked, setIsWomenChecked] = useState(false);
@@ -171,13 +171,20 @@ const NormaCalorie = () => {
             <Typography
                 sx={{
                     marginTop: '20px',
-                    marginBottom: '10px',
                     textAlign: 'center',
                 }}
                 variant="h3"
             >
                 Your result:
-                <Typography variant="h1">0/{normaCalorie}</Typography>
+            </Typography>
+            <Typography
+                sx={{
+                    textAlign: 'center',
+                    marginBottom: '10px',
+                }}
+                variant="h1"
+            >
+                {eatenCalorie}/{normaCalorie}
             </Typography>
         </Box>
     );

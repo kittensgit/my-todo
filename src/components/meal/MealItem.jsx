@@ -5,7 +5,7 @@ import EditMealForm from './EditMealForm';
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
-const MealItem = ({ foods, meal, deleteFood, updateFood, calorieFood }) => {
+const MealItem = ({ foods, meal, deleteFood, updateFood }) => {
     const [isEdit, setIsEdit] = useState(false);
 
     const toggleEdit = () => {
@@ -37,7 +37,7 @@ const MealItem = ({ foods, meal, deleteFood, updateFood, calorieFood }) => {
                 <>
                     <Typography variant="body2">
                         {meal.name} - {meal.weight} gramm -{' '}
-                        {calorieFood(meal.weight, meal.calorie)} calorie
+                        {meal.calculatedCalories} calorie
                     </Typography>
                     <Button onClick={toggleEdit}>
                         <EditIcon />
