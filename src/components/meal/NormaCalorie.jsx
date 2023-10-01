@@ -6,7 +6,7 @@ import {
     TextField,
     Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const NormaCalorie = ({ eatenCalorie }) => {
     const [normaCalorie, setNormaCalorie] = useState(0);
@@ -16,6 +16,50 @@ const NormaCalorie = ({ eatenCalorie }) => {
     const [weight, setWeight] = useState('');
     const [height, setHeight] = useState('');
     const [selectActivity, setSelectActivity] = useState('');
+
+    // Вызываем загрузку из локального хранилища при монтировании компонента
+    useEffect(() => {
+        loadFromLocalStorage();
+    }, []);
+
+    // Вызываем сохранение в локальное хранилище при изменении значений
+    useEffect(() => {
+        saveToLocalStorage();
+    }, [
+        isMenChecked,
+        isWomenChecked,
+        age,
+        weight,
+        height,
+        selectActivity,
+        normaCalorie,
+    ]);
+
+    // Функция для сохранения значений в локальном хранилище
+    const saveToLocalStorage = () => {
+        localStorage.setItem('isMenChecked', JSON.stringify(isMenChecked));
+        localStorage.setItem('isWomenChecked', JSON.stringify(isWomenChecked));
+        localStorage.setItem('age', age);
+        localStorage.setItem('weight', weight);
+        localStorage.setItem('height', height);
+        localStorage.setItem('selectActivity', selectActivity);
+        localStorage.setItem('normaCalorie', normaCalorie);
+    };
+
+    // Функция для загрузки значений из локального хранилища
+    const loadFromLocalStorage = () => {
+        setIsMenChecked(
+            JSON.parse(localStorage.getItem('isMenChecked')) || false
+        );
+        setIsWomenChecked(
+            JSON.parse(localStorage.getItem('isWomenChecked')) || false
+        );
+        setAge(localStorage.getItem('age') || '');
+        setWeight(localStorage.getItem('weight') || '');
+        setHeight(localStorage.getItem('height') || '');
+        setSelectActivity(localStorage.getItem('selectActivity') || '');
+        setNormaCalorie(Number(localStorage.getItem('normaCalorie')) || 0);
+    };
 
     const handleChangeMen = () => {
         setIsMenChecked(!isMenChecked);
@@ -81,6 +125,16 @@ const NormaCalorie = ({ eatenCalorie }) => {
         }
 
         setNormaCalorie(maleBMR + femaleBMR);
+    };
+
+    const handleClear = () => {
+        setIsMenChecked(false);
+        setIsWomenChecked(false);
+        setAge('');
+        setWeight('');
+        setHeight('');
+        setSelectActivity('');
+        setNormaCalorie(0);
     };
 
     return (
@@ -166,6 +220,9 @@ const NormaCalorie = ({ eatenCalorie }) => {
                 </TextField>
                 <Button variant="contained" onClick={handleClick}>
                     Calculate
+                </Button>
+                <Button variant="outlined" onClick={handleClear}>
+                    Clear all
                 </Button>
             </Box>
             <Typography
