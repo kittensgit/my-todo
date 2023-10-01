@@ -10,11 +10,11 @@ const Meal = ({
     changeEatenCalorie,
 }) => {
     useEffect(() => {
-        const localMeal = JSON.parse(localStorage.getItem(`meal_${mealName}`));
+        const localMeal = JSON.parse(localStorage.getItem(`meals`));
         if (localMeal) {
             setSelectedFoodList(localMeal);
         }
-    }, [mealName, setSelectedFoodList]);
+    }, [setSelectedFoodList]);
     const filteredFoodList = selectedFoodList.filter(
         (meal) => meal.mealName === mealName
     );
@@ -24,7 +24,7 @@ const Meal = ({
             (selectedFood) => selectedFood.id !== idMeal
         );
         setSelectedFoodList(updatedMeal);
-        localStorage.setItem(`meal_${mealName}`, JSON.stringify(updatedMeal));
+        localStorage.setItem(`meals`, JSON.stringify(updatedMeal));
     };
 
     const updateFood = (updatedMeal) => {
@@ -32,10 +32,7 @@ const Meal = ({
             food.id === updatedMeal.id ? updatedMeal : food
         );
         setSelectedFoodList?.(updatedSelectedFoodList);
-        localStorage.setItem(
-            `meal_${mealName}`,
-            JSON.stringify(updatedSelectedFoodList)
-        );
+        localStorage.setItem(`meals`, JSON.stringify(updatedSelectedFoodList));
         changeEatenCalorie(updatedMeal.calculatedCalories);
     };
 

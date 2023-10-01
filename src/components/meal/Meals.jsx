@@ -46,8 +46,10 @@ const Meals = ({ changeEatenCalorie }) => {
             };
             const updatedFoodList = [...selectedFoodList, newMeal];
             setSelectedFoodList(updatedFoodList);
+
+            // Сохраняем все приемы пищи в одном ключе localStorage
             localStorage.setItem(
-                `meal_${selectedMealName}`,
+                `meals`, // Название ключа можно оставить общим для всех приемов
                 JSON.stringify(updatedFoodList)
             );
         }
