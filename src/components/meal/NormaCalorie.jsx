@@ -62,11 +62,23 @@ const NormaCalorie = ({ eatenCalorie }) => {
     };
 
     const handleChangeMen = () => {
-        setIsMenChecked(!isMenChecked);
+        if (!isWomenChecked) {
+            setIsMenChecked(!isMenChecked);
+        } else {
+            setIsMenChecked(true);
+            setIsWomenChecked(false);
+        }
     };
+
     const handleChangeWomen = () => {
-        setIsWomenChecked(!isWomenChecked);
+        if (!isMenChecked) {
+            setIsWomenChecked(!isWomenChecked);
+        } else {
+            setIsWomenChecked(true);
+            setIsMenChecked(false);
+        }
     };
+
     const handleChangeAge = (e) => {
         setAge(e.target.value);
     };
