@@ -119,6 +119,7 @@ const Meals = ({ changeEatenCalorie }) => {
                         selectedMealName={selectedMealName}
                         setSelectedFoodList={setSelectedFoodList}
                         changeEatenCalorie={changeEatenCalorie}
+                        calorieFood={calorieFood}
                     />
                 ))}
             </Box>

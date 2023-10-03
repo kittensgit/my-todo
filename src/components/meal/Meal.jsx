@@ -8,6 +8,7 @@ const Meal = ({
     selectedFoodList,
     setSelectedFoodList,
     changeEatenCalorie,
+    calorieFood,
 }) => {
     useEffect(() => {
         const localMeal = JSON.parse(localStorage.getItem(`meals`));
@@ -48,6 +49,7 @@ const Meal = ({
                             meal={meal}
                             deleteFood={deleteFood}
                             updateFood={updateFood}
+                            calorieFood={calorieFood}
                         />
                     ))}
             </Box>

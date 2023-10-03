@@ -5,7 +5,7 @@ import EditMealForm from './EditMealForm';
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
-const MealItem = ({ foods, meal, deleteFood, updateFood }) => {
+const MealItem = ({ foods, meal, deleteFood, updateFood, calorieFood }) => {
     const [isEdit, setIsEdit] = useState(false);
 
     const toggleEdit = () => {
@@ -32,6 +32,7 @@ const MealItem = ({ foods, meal, deleteFood, updateFood }) => {
                     meal={meal}
                     updateFood={updateFood}
                     toggleEdit={toggleEdit}
+                    calorieFood={calorieFood}
                 />
             ) : (
                 <>

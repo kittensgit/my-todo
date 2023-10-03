@@ -187,7 +187,7 @@ const NormaCalorie = ({ eatenCalorie }) => {
                     </Box>
                 </Box>
                 <TextField
-                    sx={{ width: '150px' }}
+                    sx={{ width: '100px' }}
                     label="Enter age"
                     variant="outlined"
                     size="small"
@@ -195,7 +195,7 @@ const NormaCalorie = ({ eatenCalorie }) => {
                     onChange={handleChangeAge}
                 />
                 <TextField
-                    sx={{ width: '150px' }}
+                    sx={{ width: '100px' }}
                     label="Enter weight"
                     variant="outlined"
                     size="small"
@@ -203,7 +203,7 @@ const NormaCalorie = ({ eatenCalorie }) => {
                     onChange={handleChangeWeight}
                 />
                 <TextField
-                    sx={{ width: '150px' }}
+                    sx={{ width: '100px' }}
                     label="Enter height"
                     variant="outlined"
                     size="small"
