@@ -16,7 +16,6 @@ const MealItem = ({ foods, meal, deleteFood, updateFood, calorieFood }) => {
         <Box
             key={meal.id}
             mt={2}
-            className="meal"
             sx={{
                 display: 'flex',
                 alignItems: 'center',
