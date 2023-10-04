@@ -9,6 +9,7 @@ const Meal = ({
     setSelectedFoodList,
     changeEatenCalorie,
     calorieFood,
+    calcMacronutrient,
 }) => {
     useEffect(() => {
         const localMeal = JSON.parse(localStorage.getItem(`meals`));
@@ -65,7 +66,7 @@ const Meal = ({
             mx={2}
             mt={2}
             sx={{
-                width: '360px',
+                width: '400px',
             }}
         >
             <Typography sx={{ textAlign: 'center' }} variant="h2">
@@ -81,6 +82,7 @@ const Meal = ({
                             deleteFood={deleteFood}
                             updateFood={updateFood}
                             calorieFood={calorieFood}
+                            calcMacronutrient={calcMacronutrient}
                         />
                     ))}
             </Box>

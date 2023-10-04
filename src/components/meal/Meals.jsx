@@ -3,7 +3,6 @@ import { Box } from '@mui/material';
 import Meal from './Meal';
 import MealForm from './MealForm';
 import { v4 as uuidv4 } from 'uuid';
-// import { CheckBox } from '@mui/icons-material';
 
 // Компонент Meals отображает форму приемов пищи и список выбранных блюд
 const Meals = ({ changeEatenCalorie }) => {
@@ -18,22 +17,35 @@ const Meals = ({ changeEatenCalorie }) => {
         {
             id: uuidv4(),
             name: 'soup',
-            calorie: 53,
+            calorie: 56,
+            protein: 5.34,
+            fats: 1.71,
+            carbs: 4.74,
         },
         {
             id: uuidv4(),
             name: 'cake',
             calorie: 372,
+            protein: 6.4,
+            fats: 22,
+            carbs: 38.7,
         },
         {
             id: uuidv4(),
             name: 'salad',
             calorie: 180,
+            protein: 13,
+            fats: 7,
+            carbs: 5,
         },
     ];
 
     const calorieFood = (weight, calorie) => {
         return Math.round((weight * calorie) / 100);
+    };
+
+    const calcMacronutrient = (weight, protein) => {
+        return Math.round((weight * protein) / 100);
     };
 
     // Функция для добавления блюда в список
@@ -73,6 +85,18 @@ const Meals = ({ changeEatenCalorie }) => {
                     calculatedCalories: calorieFood(
                         value || 0,
                         selectedFoodObj.calorie
+                    ),
+                    calculatedProtein: calcMacronutrient(
+                        value || 0,
+                        selectedFoodObj.protein
+                    ),
+                    calculatedFats: calcMacronutrient(
+                        value || 0,
+                        selectedFoodObj.fats
+                    ),
+                    calculatedCarbs: calcMacronutrient(
+                        value || 0,
+                        selectedFoodObj.carbs
                     ),
                 };
 
@@ -120,6 +144,7 @@ const Meals = ({ changeEatenCalorie }) => {
                         setSelectedFoodList={setSelectedFoodList}
                         changeEatenCalorie={changeEatenCalorie}
                         calorieFood={calorieFood}
+                        calcMacronutrient={calcMacronutrient}
                     />
                 ))}
             </Box>

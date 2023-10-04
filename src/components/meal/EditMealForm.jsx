@@ -2,7 +2,14 @@ import { Button, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 
-const EditMealForm = ({ foods, meal, updateFood, toggleEdit, calorieFood }) => {
+const EditMealForm = ({
+    foods,
+    meal,
+    updateFood,
+    toggleEdit,
+    calorieFood,
+    calcMacronutrient,
+}) => {
     const [value, setValue] = useState(meal.name);
     const [weight, setWeight] = useState(meal.weight);
 
@@ -25,6 +32,12 @@ const EditMealForm = ({ foods, meal, updateFood, toggleEdit, calorieFood }) => {
                     calorie: mealObj.calorie,
                     weight,
                     calculatedCalories: calorieFood(weight, mealObj.calorie),
+                    calculatedProtein: calcMacronutrient(
+                        weight,
+                        mealObj.protein
+                    ),
+                    calculatedFats: calcMacronutrient(weight, mealObj.fats),
+                    calculatedCarbs: calcMacronutrient(weight, mealObj.carbs),
                 };
                 updateFood(updatedMeal);
             }

@@ -5,7 +5,15 @@ import EditMealForm from './EditMealForm';
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
-const MealItem = ({ foods, meal, deleteFood, updateFood, calorieFood }) => {
+const MealItem = ({
+    foods,
+    meal,
+    deleteFood,
+    updateFood,
+    calorieFood,
+    calcMacronutrient,
+}) => {
+    // console.log(meal);
     const [isEdit, setIsEdit] = useState(false);
 
     const toggleEdit = () => {
@@ -22,7 +30,8 @@ const MealItem = ({ foods, meal, deleteFood, updateFood, calorieFood }) => {
                 justifyContent: 'space-between',
                 border: '1px dashed #000',
                 padding: '10px',
-                width: '360px',
+                width: '400px',
+                flexWrap: 'wrap',
             }}
         >
             {isEdit ? (
@@ -32,10 +41,11 @@ const MealItem = ({ foods, meal, deleteFood, updateFood, calorieFood }) => {
                     updateFood={updateFood}
                     toggleEdit={toggleEdit}
                     calorieFood={calorieFood}
+                    calcMacronutrient={calcMacronutrient}
                 />
             ) : (
                 <>
-                    <Typography variant="body2">
+                    <Typography variant="body1">
                         {meal.name} - {meal.weight} gramm -{' '}
                         {meal.calculatedCalories} calorie
                     </Typography>
@@ -45,6 +55,25 @@ const MealItem = ({ foods, meal, deleteFood, updateFood, calorieFood }) => {
                     <Button onClick={() => deleteFood(meal.id)}>
                         <DeleteIcon />
                     </Button>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            gap: '80px',
+                            marginTop: '10px',
+                        }}
+                    >
+                        <Typography variant="body2">
+                            Protein: {meal.calculatedProtein}
+                        </Typography>
+                        <Typography variant="body2">
+                            Fats: {meal.calculatedFats}
+                        </Typography>
+                        <Typography variant="body2">
+                            Carbs: {meal.calculatedCarbs}
+                        </Typography>
+                    </Box>
                 </>
             )}
         </Box>
