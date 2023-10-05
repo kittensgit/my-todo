@@ -8,7 +8,12 @@ import {
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
-const NormaCalorie = ({ eatenCalorie }) => {
+const NormaCalorie = ({
+    eatenCalorie,
+    eatenProtein,
+    eatenFats,
+    eatenCarbs,
+}) => {
     const [normaCalorie, setNormaCalorie] = useState(0);
     const [isMenChecked, setIsMenChecked] = useState(false);
     const [isWomenChecked, setIsWomenChecked] = useState(false);
@@ -255,6 +260,17 @@ const NormaCalorie = ({ eatenCalorie }) => {
             >
                 {eatenCalorie}/{normaCalorie}
             </Typography>
+            <Box display={'flex'} justifyContent={'center'} gap={'20px'}>
+                <Typography variant="h4" mb={3}>
+                    Protein: {eatenProtein}
+                </Typography>
+                <Typography variant="h4" mb={3}>
+                    Fats: {eatenFats}
+                </Typography>
+                <Typography variant="h4" mb={3}>
+                    Carbs: {eatenCarbs}
+                </Typography>
+            </Box>
         </Box>
     );
 };

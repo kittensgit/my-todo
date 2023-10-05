@@ -10,6 +10,9 @@ const Meal = ({
     changeEatenCalorie,
     calorieFood,
     calcMacronutrient,
+    changeEatenProtein,
+    changeEatenCarbs,
+    changeEatenFats,
 }) => {
     useEffect(() => {
         const localMeal = JSON.parse(localStorage.getItem(`meals`));
@@ -30,6 +33,9 @@ const Meal = ({
         if (deletedMeal) {
             // Вызываем changeEatenCalorie с отрицательным значением калорий удаленной еды
             changeEatenCalorie(-deletedMeal.calculatedCalories);
+            changeEatenProtein(-deletedMeal.calculatedProtein);
+            changeEatenFats(-deletedMeal.calculatedFats);
+            changeEatenCarbs(-deletedMeal.calculatedCarbs);
 
             // Удаляем еду из selectedFoodList и обновляем localStorage
             const updatedMeal = selectedFoodList.filter(
@@ -53,9 +59,21 @@ const Meal = ({
         // Рассчитываем разницу в калориях между новым и старым значением
         const calorieDifference =
             updatedMeal.calculatedCalories - oldMeal.calculatedCalories;
+        // Рассчитываем разницу в белках между новым и старым значением
+        const proteinDifference =
+            updatedMeal.calculatedProtein - oldMeal.calculatedProtein;
+        // Рассчитываем разницу в жирах между новым и старым значением
+        const fatsDifference =
+            updatedMeal.calculatedFats - oldMeal.calculatedFats;
+        // Рассчитываем разницу в углеводах между новым и старым значением
+        const carbsDifference =
+            updatedMeal.calculatedCarbs - oldMeal.calculatedCarbs;
 
         // Вызываем changeEatenCalorie с разницей в калориях
         changeEatenCalorie(calorieDifference);
+        changeEatenProtein(proteinDifference);
+        changeEatenFats(fatsDifference);
+        changeEatenCarbs(carbsDifference);
 
         setSelectedFoodList?.(updatedSelectedFoodList);
         localStorage.setItem(`meals`, JSON.stringify(updatedSelectedFoodList));

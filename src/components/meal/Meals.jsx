@@ -5,7 +5,12 @@ import MealForm from './MealForm';
 import { v4 as uuidv4 } from 'uuid';
 
 // Компонент Meals отображает форму приемов пищи и список выбранных блюд
-const Meals = ({ changeEatenCalorie }) => {
+const Meals = ({
+    changeEatenCalorie,
+    changeEatenProtein,
+    changeEatenFats,
+    changeEatenCarbs,
+}) => {
     const [selectedMeal, setSelectedMeal] = useState('Breakfast'); // Выбранный прием пищи
     const [selectedFood, setSelectedFood] = useState(''); // Выбранное блюдо
     const [value, setValue] = useState(''); // Введенный вес
@@ -103,6 +108,9 @@ const Meals = ({ changeEatenCalorie }) => {
                 // Вызываем функцию для добавления еды в прием пищи
                 addFoodToMeal(mealObj);
                 changeEatenCalorie(mealObj.calculatedCalories);
+                changeEatenProtein(mealObj.calculatedProtein);
+                changeEatenFats(mealObj.calculatedFats);
+                changeEatenCarbs(mealObj.calculatedCarbs);
             }
         }
     };
@@ -113,6 +121,7 @@ const Meals = ({ changeEatenCalorie }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
+                marginBottom: '140px',
             }}
         >
             <MealForm
@@ -143,6 +152,9 @@ const Meals = ({ changeEatenCalorie }) => {
                         selectedMealName={selectedMealName}
                         setSelectedFoodList={setSelectedFoodList}
                         changeEatenCalorie={changeEatenCalorie}
+                        changeEatenProtein={changeEatenProtein}
+                        changeEatenCarbs={changeEatenCarbs}
+                        changeEatenFats={changeEatenFats}
                         calorieFood={calorieFood}
                         calcMacronutrient={calcMacronutrient}
                     />
