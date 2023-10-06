@@ -12,6 +12,7 @@ const CaloriePage = () => {
     const [eatenProtein, setEatenProtein] = useState(0);
     const [eatenFats, setEatenFats] = useState(0);
     const [eatenCarbs, setEatenCarbs] = useState(0);
+    const [isShowChart, setIsShowChart] = useState(false);
 
     useEffect(() => {
         loadEatenCalorieAndMacroFromLocalStorage();
@@ -70,6 +71,10 @@ const CaloriePage = () => {
         saveEatenCarbsToLocalStorage(sumEatenCarbs);
     };
 
+    const toggleShowChart = () => {
+        setIsShowChart(!isShowChart);
+    };
+
     const data = {
         labels: ['Protein', 'Fats', 'Carbs'],
         datasets: [
@@ -98,15 +103,17 @@ const CaloriePage = () => {
                 eatenProtein={eatenProtein}
                 eatenFats={eatenFats}
                 eatenCarbs={eatenCarbs}
+                isShowChart={isShowChart}
+                toggleShowChart={toggleShowChart}
             />
-            {eatenProtein && eatenFats && eatenCarbs ? (
+
+            {isShowChart ? (
                 <Box width={'400px'} margin={'0 auto'} mb={3}>
                     <Pie data={data} />
                 </Box>
             ) : (
                 <></>
             )}
-
             <Meals
                 changeEatenCalorie={changeEatenCalorie}
                 changeEatenProtein={changeEatenProtein}

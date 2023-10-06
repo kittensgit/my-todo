@@ -13,6 +13,8 @@ const NormaCalorie = ({
     eatenProtein,
     eatenFats,
     eatenCarbs,
+    isShowChart,
+    toggleShowChart,
 }) => {
     const [normaCalorie, setNormaCalorie] = useState(0);
     const [isMenChecked, setIsMenChecked] = useState(false);
@@ -155,12 +157,17 @@ const NormaCalorie = ({
     };
 
     return (
-        <Box mx={3}>
+        <Box
+            display={'flex'}
+            alignItems={'center'}
+            justifyContent={'space-between'}
+            flexDirection={'column'}
+            mx={3}
+        >
             <Typography
                 sx={{
-                    marginLeft: '40px',
                     marginTop: '20px',
-                    marginBottom: '10px',
+                    marginBottom: '30px',
                 }}
                 variant="h2"
             >
@@ -247,13 +254,13 @@ const NormaCalorie = ({
                     marginTop: '20px',
                     textAlign: 'center',
                 }}
-                variant="h3"
+                variant="h4"
             >
-                Your result:
+                Your calorie intake and the number of calories you have already
+                eaten:
             </Typography>
             <Typography
                 sx={{
-                    textAlign: 'center',
                     marginBottom: '10px',
                 }}
                 variant="h1"
@@ -271,6 +278,17 @@ const NormaCalorie = ({
                     Carbs: {eatenCarbs}
                 </Typography>
             </Box>
+            <Button
+                onClick={() => {
+                    toggleShowChart();
+                }}
+                sx={{ marginBottom: '20px' }}
+                variant="outlined"
+            >
+                {isShowChart
+                    ? 'hide chart of macronutrients eaten'
+                    : 'show chart of macronutrients eaten'}
+            </Button>
         </Box>
     );
 };

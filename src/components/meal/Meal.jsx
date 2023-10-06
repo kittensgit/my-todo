@@ -69,7 +69,6 @@ const Meal = ({
         const carbsDifference =
             updatedMeal.calculatedCarbs - oldMeal.calculatedCarbs;
 
-        // Вызываем changeEatenCalorie с разницей в калориях
         changeEatenCalorie(calorieDifference);
         changeEatenProtein(proteinDifference);
         changeEatenFats(fatsDifference);

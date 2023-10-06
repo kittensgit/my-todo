@@ -82,7 +82,7 @@ const MealForm = ({
                 <MenuItem value="Lunch">Lunch</MenuItem>
                 <MenuItem value="Dinner">Dinner</MenuItem>
             </TextField>
-            <Button size="small" variant="outlined" onClick={handleAddClick}>
+            <Button size="small" variant="contained" onClick={handleAddClick}>
                 Add
             </Button>
         </Box>
