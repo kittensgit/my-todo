@@ -79,14 +79,8 @@ const Meal = ({
     };
 
     return (
-        <Box
-            mx={2}
-            mt={2}
-            sx={{
-                width: '400px',
-            }}
-        >
-            <Typography sx={{ textAlign: 'center' }} variant="h2">
+        <Box className="meal">
+            <Typography sx={{ textAlign: 'center' }} variant="h3">
                 {mealName}
             </Typography>
             <Box>

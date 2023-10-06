@@ -21,19 +21,7 @@ const MealItem = ({
     };
 
     return (
-        <Box
-            key={meal.id}
-            mt={2}
-            sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                border: '1px dashed #000',
-                padding: '10px',
-                width: '400px',
-                flexWrap: 'wrap',
-            }}
-        >
+        <Box className="meal-item">
             {isEdit ? (
                 <EditMealForm
                     foods={foods}

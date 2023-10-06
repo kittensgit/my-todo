@@ -94,6 +94,54 @@ input {
     background-color: #222;
 }
 
+.meals {
+    display: flex;
+    padding: 0 60px;
+    flex-direction: column;
+    margin-bottom: 140px;
+    justify-content: space-between;
+}
+
+.meal {
+    width: 400px;
+    margin: 20px 10px 20px;
+}
+
+.meal-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px dashed black;
+    padding: 10px;
+    width: 400px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.normaCalorie-form {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.normaCalorie-fields {
+    display: flex;
+    gap: 10px;
+}
+
+@media (max-width: 1350px) {
+    .normaCalorie-form {
+        flex-direction: column;
+    }
+    .normaCalorie-fields {
+        gap: 20px;
+    }
+    .meals {
+        padding: 0 15px;
+    }
+}
+
 @media (max-width: 698px) {
     .todoform {
         flex-direction: column;

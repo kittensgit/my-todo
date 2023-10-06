@@ -116,14 +116,7 @@ const Meals = ({
     };
 
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                marginBottom: '140px',
-            }}
-        >
+        <Box className="meals">
             <MealForm
                 addSelectedFood={addSelectedFood}
                 selectedFood={selectedFood}
@@ -139,7 +132,6 @@ const Meals = ({
             <Box
                 sx={{
                     display: 'flex',
-                    padding: '0 50px',
                     justifyContent: 'space-between',
                 }}
             >

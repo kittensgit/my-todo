@@ -1,22 +1,9 @@
-import {
-    Box,
-    Button,
-    Checkbox,
-    MenuItem,
-    TextField,
-    Typography,
-} from '@mui/material';
+import { Box, Button, MenuItem, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import CheckboxWithLabel from './CheckboxWithLabel';
+import TextFieldWithLabel from './TextFieldWithLabel';
 
-const NormaCalorie = ({
-    eatenCalorie,
-    eatenProtein,
-    eatenFats,
-    eatenCarbs,
-    isShowChart,
-    toggleShowChart,
-}) => {
-    const [normaCalorie, setNormaCalorie] = useState(0);
+const NormaCalorieForm = ({ saveBMRToNormaCalorie, clearNormaCalorie }) => {
     const [isMenChecked, setIsMenChecked] = useState(false);
     const [isWomenChecked, setIsWomenChecked] = useState(false);
     const [age, setAge] = useState('');
@@ -32,15 +19,7 @@ const NormaCalorie = ({
     // Вызываем сохранение в локальное хранилище при изменении значений
     useEffect(() => {
         saveToLocalStorage();
-    }, [
-        isMenChecked,
-        isWomenChecked,
-        age,
-        weight,
-        height,
-        selectActivity,
-        normaCalorie,
-    ]);
+    }, [isMenChecked, isWomenChecked, age, weight, height, selectActivity]);
 
     // Функция для сохранения значений в локальном хранилище
     const saveToLocalStorage = () => {
@@ -50,7 +29,6 @@ const NormaCalorie = ({
         localStorage.setItem('weight', weight);
         localStorage.setItem('height', height);
         localStorage.setItem('selectActivity', selectActivity);
-        localStorage.setItem('normaCalorie', normaCalorie);
     };
 
     // Функция для загрузки значений из локального хранилища
@@ -65,7 +43,6 @@ const NormaCalorie = ({
         setWeight(localStorage.getItem('weight') || '');
         setHeight(localStorage.getItem('height') || '');
         setSelectActivity(localStorage.getItem('selectActivity') || '');
-        setNormaCalorie(Number(localStorage.getItem('normaCalorie')) || 0);
     };
 
     const handleChangeMen = () => {
@@ -143,7 +120,7 @@ const NormaCalorie = ({
             );
         }
 
-        setNormaCalorie(maleBMR + femaleBMR);
+        saveBMRToNormaCalorie(maleBMR + femaleBMR);
     };
 
     const handleClear = () => {
@@ -153,72 +130,42 @@ const NormaCalorie = ({
         setWeight('');
         setHeight('');
         setSelectActivity('');
-        setNormaCalorie(0);
+        clearNormaCalorie(0);
     };
 
     return (
-        <Box
-            display={'flex'}
-            alignItems={'center'}
-            justifyContent={'space-between'}
-            flexDirection={'column'}
-            mx={3}
-        >
-            <Typography
-                sx={{
-                    marginTop: '20px',
-                    marginBottom: '30px',
-                }}
-                variant="h2"
-            >
-                Calculate your daily calorie intake:
-            </Typography>
+        <Box className={'normaCalorie-form'}>
             <Box
                 sx={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '20px',
-                    justifyContent: 'center',
                 }}
             >
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Typography variant="h5">Choose gender:</Typography>
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Checkbox
-                            checked={isMenChecked}
-                            onChange={handleChangeMen}
-                        />
-                        <Typography variant="h6">Men</Typography>
-                    </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Checkbox
-                            checked={isWomenChecked}
-                            onChange={handleChangeWomen}
-                        />
-                        <Typography variant="h6">Women</Typography>
-                    </Box>
-                </Box>
-                <TextField
-                    sx={{ width: '100px' }}
+                <Typography variant="h5">Choose gender:</Typography>
+                <CheckboxWithLabel
+                    checked={isMenChecked}
+                    onChange={handleChangeMen}
+                    label={'Men'}
+                />
+                <CheckboxWithLabel
+                    checked={isWomenChecked}
+                    onChange={handleChangeWomen}
+                    label={'Women'}
+                />
+            </Box>
+            <Box className="normaCalorie-fields">
+                <TextFieldWithLabel
                     label="Enter age"
-                    variant="outlined"
-                    size="small"
                     value={age}
                     onChange={handleChangeAge}
                 />
-                <TextField
-                    sx={{ width: '100px' }}
+                <TextFieldWithLabel
                     label="Enter weight"
-                    variant="outlined"
-                    size="small"
                     value={weight}
                     onChange={handleChangeWeight}
                 />
-                <TextField
-                    sx={{ width: '100px' }}
+                <TextFieldWithLabel
                     label="Enter height"
-                    variant="outlined"
-                    size="small"
                     value={height}
                     onChange={handleChangeHeight}
                 />
@@ -242,6 +189,9 @@ const NormaCalorie = ({
                         Very high activity
                     </MenuItem>
                 </TextField>
+            </Box>
+
+            <Box display={'flex'} gap={'10px'}>
                 <Button variant="contained" onClick={handleClick}>
                     Calculate
                 </Button>
@@ -249,48 +199,8 @@ const NormaCalorie = ({
                     Clear all
                 </Button>
             </Box>
-            <Typography
-                sx={{
-                    marginTop: '20px',
-                    textAlign: 'center',
-                }}
-                variant="h4"
-            >
-                Your calorie intake and the number of calories you have already
-                eaten:
-            </Typography>
-            <Typography
-                sx={{
-                    marginBottom: '10px',
-                }}
-                variant="h1"
-            >
-                {eatenCalorie}/{normaCalorie}
-            </Typography>
-            <Box display={'flex'} justifyContent={'center'} gap={'20px'}>
-                <Typography variant="h4" mb={3}>
-                    Protein: {eatenProtein}
-                </Typography>
-                <Typography variant="h4" mb={3}>
-                    Fats: {eatenFats}
-                </Typography>
-                <Typography variant="h4" mb={3}>
-                    Carbs: {eatenCarbs}
-                </Typography>
-            </Box>
-            <Button
-                onClick={() => {
-                    toggleShowChart();
-                }}
-                sx={{ marginBottom: '20px' }}
-                variant="outlined"
-            >
-                {isShowChart
-                    ? 'hide chart of macronutrients eaten'
-                    : 'show chart of macronutrients eaten'}
-            </Button>
         </Box>
     );
 };
 
-export default NormaCalorie;
+export default NormaCalorieForm;
