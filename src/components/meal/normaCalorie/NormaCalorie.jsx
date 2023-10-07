@@ -42,47 +42,22 @@ const NormaCalorie = ({
             flexDirection={'column'}
             mx={3}
         >
-            <Typography
-                sx={{
-                    marginTop: '20px',
-                    marginBottom: '20px',
-                }}
-                variant="h2"
-            >
-                Calculate your daily calorie intake:
-            </Typography>
+            <h2 className="title1">Calculate your daily calorie intake:</h2>
             <NormaCalorieForm
                 saveBMRToNormaCalorie={saveBMRToNormaCalorie}
                 clearNormaCalorie={clearNormaCalorie}
             />
-            <Typography
-                sx={{
-                    marginTop: '20px',
-                    textAlign: 'center',
-                }}
-                variant="h4"
-            >
+            <h4 className="title2">
                 Your calorie intake and the number of calories you have already
                 eaten:
-            </Typography>
-            <Typography
-                sx={{
-                    marginBottom: '10px',
-                }}
-                variant="h1"
-            >
+            </h4>
+            <h1 className="title-calorie">
                 {eatenCalorie}/{normaCalorie}
-            </Typography>
+            </h1>
             <Box display={'flex'} justifyContent={'center'} gap={'20px'}>
-                <Typography variant="h4" mb={3}>
-                    Protein: {eatenProtein}
-                </Typography>
-                <Typography variant="h4" mb={3}>
-                    Fats: {eatenFats}
-                </Typography>
-                <Typography variant="h4" mb={3}>
-                    Carbs: {eatenCarbs}
-                </Typography>
+                <h4 className="title-pfc">Protein: {eatenProtein}</h4>
+                <h4 className="title-pfc">Fats: {eatenFats}</h4>
+                <h4 className="title-pfc">Carbs: {eatenCarbs}</h4>
             </Box>
         </Box>
     );

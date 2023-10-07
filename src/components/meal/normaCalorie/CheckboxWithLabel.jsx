@@ -5,7 +5,7 @@ const CheckboxWithLabel = ({ checked, onChange, label }) => {
     return (
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Checkbox checked={checked} onChange={onChange} />
-            <Typography variant="h6">{label}</Typography>
+            <h6 className="subtitle-gender">{label}</h6>
         </Box>
     );
 };

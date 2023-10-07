@@ -42,46 +42,48 @@ const MealForm = ({
     };
 
     return (
-        <Box sx={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
-            <TextField
-                sx={{ width: '150px' }}
-                select
-                label="Choose food"
-                size="small"
-                value={selectedFood}
-                onChange={handleFoodChange}
-            >
-                {foods.map((food) => (
-                    <MenuItem key={food.name} value={food.name}>
-                        {food.name}
-                    </MenuItem>
-                ))}
-            </TextField>
-            <TextField
-                sx={{ width: '125px' }}
-                id="outlined-basic"
-                label="Enter weight"
-                variant="outlined"
-                size="small"
-                value={value}
-                onChange={handleWeightChange}
-                onKeyDown={handleEnter}
-            />
-            <TextField
-                sx={{ width: '150px' }}
-                select
-                label="Choose meal"
-                size="small"
-                value={selectedMealName} // Используем выбранное имя приема пищи
-                onChange={(e) => {
-                    setSelectedMealName(e.target.value); // Обновляем имя приема пищи
-                    setSelectedMeal(e.target.value);
-                }}
-            >
-                <MenuItem value="Breakfast">Breakfast</MenuItem>
-                <MenuItem value="Lunch">Lunch</MenuItem>
-                <MenuItem value="Dinner">Dinner</MenuItem>
-            </TextField>
+        <Box className="meal-form">
+            <Box className="meal-form-fields">
+                <TextField
+                    sx={{ width: '150px' }}
+                    select
+                    label="Choose food"
+                    size="small"
+                    value={selectedFood}
+                    onChange={handleFoodChange}
+                >
+                    {foods.map((food) => (
+                        <MenuItem key={food.name} value={food.name}>
+                            {food.name}
+                        </MenuItem>
+                    ))}
+                </TextField>
+                <TextField
+                    sx={{ width: '125px' }}
+                    id="outlined-basic"
+                    label="Enter weight"
+                    variant="outlined"
+                    size="small"
+                    value={value}
+                    onChange={handleWeightChange}
+                    onKeyDown={handleEnter}
+                />
+                <TextField
+                    sx={{ width: '150px' }}
+                    select
+                    label="Choose meal"
+                    size="small"
+                    value={selectedMealName} // Используем выбранное имя приема пищи
+                    onChange={(e) => {
+                        setSelectedMealName(e.target.value); // Обновляем имя приема пищи
+                        setSelectedMeal(e.target.value);
+                    }}
+                >
+                    <MenuItem value="Breakfast">Breakfast</MenuItem>
+                    <MenuItem value="Lunch">Lunch</MenuItem>
+                    <MenuItem value="Dinner">Dinner</MenuItem>
+                </TextField>
+            </Box>
             <Button size="small" variant="contained" onClick={handleAddClick}>
                 Add
             </Button>

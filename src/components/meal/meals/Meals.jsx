@@ -116,7 +116,7 @@ const Meals = ({
     };
 
     return (
-        <Box className="meals">
+        <Box>
             <MealForm
                 addSelectedFood={addSelectedFood}
                 selectedFood={selectedFood}
@@ -129,12 +129,7 @@ const Meals = ({
                 selectedMealName={selectedMealName} // Передаем выбранное имя приема пищи
                 setSelectedMealName={setSelectedMealName} // Функция для обновления имени приема пищи
             />
-            <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                }}
-            >
+            <Box className="meals">
                 {mealNames.map((mealName) => (
                     <Meal
                         key={mealName} // Важно добавить ключ для каждого компонента в маппинге

@@ -134,24 +134,21 @@ const NormaCalorieForm = ({ saveBMRToNormaCalorie, clearNormaCalorie }) => {
     };
 
     return (
-        <Box className={'normaCalorie-form'}>
-            <Box
-                sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                }}
-            >
-                <Typography variant="h5">Choose gender:</Typography>
-                <CheckboxWithLabel
-                    checked={isMenChecked}
-                    onChange={handleChangeMen}
-                    label={'Men'}
-                />
-                <CheckboxWithLabel
-                    checked={isWomenChecked}
-                    onChange={handleChangeWomen}
-                    label={'Women'}
-                />
+        <Box className="normaCalorie-form">
+            <Box className="normaCalorie-checkboxes">
+                <h5 className="title-gender">Choose gender:</h5>
+                <Box display={'flex'}>
+                    <CheckboxWithLabel
+                        checked={isMenChecked}
+                        onChange={handleChangeMen}
+                        label={'Men'}
+                    />
+                    <CheckboxWithLabel
+                        checked={isWomenChecked}
+                        onChange={handleChangeWomen}
+                        label={'Women'}
+                    />
+                </Box>
             </Box>
             <Box className="normaCalorie-fields">
                 <TextFieldWithLabel

@@ -61,6 +61,60 @@ input {
     margin-right: 8px;
 }
 
+.title1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: 300;
+    font-size: 3.75rem;
+    line-height: 1.2;
+    letter-spacing: -0.00833em;
+    font-family: 'Roboto', sans-serif;
+}
+
+.title-gender {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.334;
+}
+
+.subtitle-gender {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    letter-spacing: 0.0075em;
+}
+
+.title2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 2.125rem;
+    line-height: 1.235;
+    letter-spacing: 0.00735em;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.title-calorie {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 6rem;
+    line-height: 1.167;
+    letter-spacing: -0.01562em;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.title-pfc {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 2.125rem;
+    line-height: 1.235;
+    letter-spacing: 0.00735em;
+    margin-bottom: 10px;
+}
+
 .delete {
     margin-left: 5px;
 }
@@ -97,9 +151,23 @@ input {
 .meals {
     display: flex;
     padding: 0 60px;
-    flex-direction: column;
-    margin-bottom: 140px;
-    justify-content: space-between;
+    margin-bottom: 80px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.meal-form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.meal-form-fields {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .meal {
@@ -125,9 +193,15 @@ input {
     justify-content: space-between;
 }
 
+.normaCalorie-checkboxes {
+    display: flex;
+    align-items: center;
+}
+
 .normaCalorie-fields {
     display: flex;
     gap: 10px;
+    margin: 0 20px;
 }
 
 @media (max-width: 1350px) {
@@ -137,8 +211,36 @@ input {
     .normaCalorie-fields {
         gap: 20px;
     }
-    .meals {
-        padding: 0 15px;
+}
+
+@media (max-width: 916px) {
+    .title1 {
+        font-size: 3.2rem;
+        margin-bottom: 10px;
+    }
+    .title2 {
+        font-size: 2rem;
+    }
+    .title-calorie {
+        font-size: 5.6rem;
+    }
+    .title-pfc {
+        font-size: 1.9rem;
+    }
+}
+
+@media (max-width: 788px) {
+    .title1 {
+        font-size: 2.6rem;
+    }
+    .title2 {
+        font-size: 1.6rem;
+    }
+    .title-calorie {
+        font-size: 5rem;
+    }
+    .title-pfc {
+        font-size: 1.5rem;
     }
 }
 
@@ -159,5 +261,55 @@ input {
         display: flex;
         align-items: center;
         gap: 10px;
+    }
+    .normaCalorie-fields {
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 649px) {
+    .title1 {
+        font-size: 2.1rem;
+    }
+    .title2 {
+        font-size: 1.3rem;
+    }
+    .title-calorie {
+        font-size: 4.4rem;
+    }
+    .title-pfc {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 534px) {
+    .title1 {
+        text-align: center;
+        font-size: 1.8rem;
+    }
+    .title-gender {
+        font-size: 1.2rem;
+    }
+    .subtitle-gender {
+        font-size: 1.13rem;
+    }
+    .title2 {
+        font-size: 1.2rem;
+    }
+    .title-calorie {
+        font-size: 3.8rem;
+    }
+    .title-pfc {
+        font-size: 1.1rem;
+    }
+    .meal-form {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 408px) {
+    .normaCalorie-checkboxes {
+        flex-direction: column;
     }
 }
