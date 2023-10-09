@@ -178,12 +178,19 @@ input {
 .meal-item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     border: 1px dashed black;
     padding: 10px;
     width: 400px;
     flex-wrap: wrap;
     margin-top: 20px;
+}
+
+.meal-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .normaCalorie-form {
@@ -311,5 +318,8 @@ input {
 @media (max-width: 408px) {
     .normaCalorie-checkboxes {
         flex-direction: column;
+    }
+    .meal-item {
+        width: 355px;
     }
 }

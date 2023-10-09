@@ -13,7 +13,7 @@ const App = () => {
         const currentPath = window.location.pathname;
 
         // Устанавливаем значение value в зависимости от текущего пути
-        if (currentPath === '/') {
+        if (currentPath === '/my-todo') {
             setValue(0);
         } else if (currentPath === '/calorie') {
             setValue(1);
@@ -28,7 +28,7 @@ const App = () => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
         if (newValue === 0) {
-            navigate('/');
+            navigate('/my-todo');
         } else if (newValue === 1) {
             navigate('/calorie');
         }
@@ -37,11 +37,11 @@ const App = () => {
     return (
         <div>
             <Tabs value={value} onChange={handleChange} aria-label="My Tabs">
-                <Tab label="TodoList" component={Link} to="/" />
+                <Tab label="TodoList" component={Link} to="/my-todo" />
                 <Tab label="Calorie Counter" component={Link} to="/calorie" />
             </Tabs>
             <Routes>
-                <Route path="/" element={<TodoPage />} />
+                <Route path="/my-todo" element={<TodoPage />} />
                 <Route path="/calorie" element={<CaloriePage />} />
             </Routes>
         </div>

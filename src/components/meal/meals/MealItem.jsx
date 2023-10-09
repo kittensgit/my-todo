@@ -32,37 +32,48 @@ const MealItem = ({
                     calcMacronutrient={calcMacronutrient}
                 />
             ) : (
-                <>
-                    <Typography variant="body1">
-                        {meal.name} - {meal.weight} gramm -{' '}
-                        {meal.calculatedCalories} calorie
-                    </Typography>
-                    <Button onClick={toggleEdit}>
-                        <EditIcon />
-                    </Button>
-                    <Button onClick={() => deleteFood(meal.id)}>
-                        <DeleteIcon />
-                    </Button>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            gap: '80px',
-                            marginTop: '10px',
-                        }}
-                    >
-                        <Typography variant="body2">
-                            Protein: {meal.calculatedProtein}
-                        </Typography>
-                        <Typography variant="body2">
-                            Fats: {meal.calculatedFats}
-                        </Typography>
-                        <Typography variant="body2">
-                            Carbs: {meal.calculatedCarbs}
+                <Box className="meal-info">
+                    <Box display={'flex'}>
+                        <Typography variant="body1">
+                            {meal.name} - {meal.weight} gramm -{' '}
+                            {meal.calculatedCalories} calorie
                         </Typography>
                     </Box>
-                </>
+
+                    <Box>
+                        <Button sx={{ minWidth: '24px' }} onClick={toggleEdit}>
+                            <EditIcon />
+                        </Button>
+                        <Button
+                            sx={{ minWidth: '24px' }}
+                            onClick={() => deleteFood(meal.id)}
+                        >
+                            <DeleteIcon />
+                        </Button>
+                    </Box>
+                    {isEdit ? (
+                        <></>
+                    ) : (
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                gap: '50px',
+                                marginTop: '10px',
+                            }}
+                        >
+                            <Typography variant="body2">
+                                Protein: {meal.calculatedProtein}
+                            </Typography>
+                            <Typography variant="body2">
+                                Fats: {meal.calculatedFats}
+                            </Typography>
+                            <Typography variant="body2">
+                                Carbs: {meal.calculatedCarbs}
+                            </Typography>
+                        </Box>
+                    )}
+                </Box>
             )}
         </Box>
     );
