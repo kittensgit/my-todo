@@ -14,11 +14,12 @@
 .todo {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     border-radius: 5px;
     padding: 20px;
     margin-top: 20px;
     width: 400px;
+    flex-wrap: wrap;
 }
 
 .complete {
@@ -53,12 +54,6 @@
     display: flex;
     align-items: center;
     gap: 10px;
-}
-
-input {
-    width: 200px;
-    padding: 5px;
-    margin-right: 8px;
 }
 
 .title1 {
@@ -316,10 +311,13 @@ input {
 }
 
 @media (max-width: 408px) {
+    .todo {
+        width: 355px;
+    }
     .normaCalorie-checkboxes {
         flex-direction: column;
     }
     .meal-item {
-        width: 355px;
+        width: 350px;
     }
 }

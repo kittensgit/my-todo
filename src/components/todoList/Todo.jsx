@@ -97,13 +97,13 @@ const Todo = ({
                         </Tooltip>
                     </Typography>
 
+                    <Typography variant="caption" sx={{ margin: '0 10px' }}>
+                        <div
+                            style={getPriorityStyle(todo.priority)}
+                            className="circle"
+                        ></div>
+                    </Typography>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Typography variant="caption" marginRight={2}>
-                            <div
-                                style={getPriorityStyle(todo.priority)}
-                                className="circle"
-                            ></div>
-                        </Typography>
                         <Button onClick={toggleEdit}>
                             <EditIcon />
                         </Button>
