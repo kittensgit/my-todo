@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import EditTodoForm from './EditTodoForm';
+
 import { Box, Button, Checkbox, Tooltip, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+
+import EditTodoForm from './EditTodoForm';
 
 const Todo = ({
     todo,

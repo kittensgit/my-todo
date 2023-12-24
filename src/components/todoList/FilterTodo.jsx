@@ -1,6 +1,8 @@
 import React from 'react';
-import SearchTodo from './SearchTodo';
+
 import { Box, Button } from '@mui/material';
+
+import SearchTodo from './SearchTodo';
 import SortTodo from './SortTodo';
 
 const FilterTodo = ({

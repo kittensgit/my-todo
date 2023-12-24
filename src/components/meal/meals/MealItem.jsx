@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import EditMealForm from './EditMealForm';
+
 import { Button, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+
+import EditMealForm from './EditMealForm';
 
 const MealItem = ({
     foods,
@@ -13,7 +15,6 @@ const MealItem = ({
     calorieFood,
     calcMacronutrient,
 }) => {
-    // console.log(meal);
     const [isEdit, setIsEdit] = useState(false);
 
     const toggleEdit = () => {

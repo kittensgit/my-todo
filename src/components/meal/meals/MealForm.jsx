@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Box, Button, TextField, MenuItem } from '@mui/material';
 
 // Компонент MealForm содержит форму для добавления блюд в список приемов пищи

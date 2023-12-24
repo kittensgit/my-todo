@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Tab, Tabs } from '@mui/material';
-import TodoPage from './components/pages/TodoPage';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+
+import { Tab, Tabs } from '@mui/material';
+
+import TodoPage from './components/pages/TodoPage';
 import CaloriePage from './components/pages/CaloriePage';
 
 const App = () => {

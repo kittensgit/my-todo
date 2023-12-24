@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
 import { Box } from '@mui/material';
+
 import Meal from './Meal';
 import MealForm from './MealForm';
-import { v4 as uuidv4 } from 'uuid';
 
 // Компонент Meals отображает форму приемов пищи и список выбранных блюд
 const Meals = ({

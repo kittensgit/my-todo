@@ -1,6 +1,8 @@
 import React from 'react';
-import Todo from './Todo';
+
 import { Box } from '@mui/material';
+
+import Todo from './Todo';
 
 const TodoList = ({
     filteredAndSortedTasks,

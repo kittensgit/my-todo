@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import Meals from '../meal/meals/Meals';
-import NormaCalorie from '../meal/normaCalorie/NormaCalorie';
+
+import { Box } from '@mui/material';
+
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import { Box } from '@mui/material';
+
+import Meals from '../meal/meals/Meals';
+import NormaCalorie from '../meal/normaCalorie/NormaCalorie';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
